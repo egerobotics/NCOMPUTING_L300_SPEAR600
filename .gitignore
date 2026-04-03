@@ -74,5 +74,5 @@ recovery/
 # Build logs
 build.log
 
-# xloader binary at root
-xloader_image.bin
+# xloader binary at root (not in system_images/)
+/xloader_image.bin
