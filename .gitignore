@@ -62,8 +62,8 @@ packages/strace-*/
 packages/htop-*
 packages/*.tar.*
 
-# USB flasher
-usb_flasher/
+# USB flasher archive
+usb_flasher/flasher.tar
 
 # Embedded git repos
 tools/framebuffer-vncserver/

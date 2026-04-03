@@ -1,0 +1,18 @@
+Set following switch positions for SPEAr evaluation boards.
+
+.Boot Pin Selection
+[width="50%", options="header", frame="topbot", cols="20%,80%"]
+|=========================================================
+| SoC	     | Boot Pin
+| SPEAr600   | set SW2-5 ON
+| SPEAr300   | set SW3-1, SW3-2, SW3-3 and SW3-4 ON
+| SPEAr310   | set SW2-6 ON and SW2-7, SW2-8 OFF
+| SPEAr320   | set SW2-1, SW2-3, SW2-5, SW2-7 OFF SW2-2, SW2-4, SW2-6, SW2-8 ON
+| SPEAr13xx  | set SW3-1, SW3-2 and SW3-3 ON and SW3-4 OFF
+| SPEAr1340  | set SW3-1, SW3-2, SW3-3 ON and SW3-4 OFF
+|=========================================================
+
+NOTE: These switch settings may vary as per the board design and are
+directly related to boot pin configuration for each platform. Details
+can be found in corresponding device reference manual and SPEAr board
+reference manual

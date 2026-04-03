@@ -1,0 +1,62 @@
+== Overview ==
+
+USB boot, on SPEAr platforms, provides the means to flash the binary
+images to the NOR/NAND flash using USB device port. This technique is
+introduced to avoid the need of any external H/W tool other than USB
+Host PC to bring up the board.
+
+To use this feature, SPEAr Board needs to be booted in USB Boot Mode.
+The USB flashing utility is used on the USB host side to carry out
+flashing. Current version of this utility is available for Windows
+and Linux host machine.
+
+The flashing utility is flexible enough to support other features beside
+flashing with some changes. These possible features have been described
+in Appendix. In general it supports following key features. 
+
+=== Key Features ===
+
+USB Flashing utility supports following features.
+
+   - Ability to define partition layout for different memory (Nand/Nor)
+     chips with different sector/block size
+   - Save partition layout information in a file for later use
+   - Ability to flash images to any of the configured partition
+   - Support flashing jffs2 images for NAND
+   - Save configurations that define images to be flashed to partitions
+   - Receiving a binary file over USBTTY interface onto SPEAr board.
+   - Run U-Boot commands and receive response
+   - Update environment variables of u-boot
+
+=== Features in v-2.4 ===
+
+This is a minor release with few bug fixes for default partition layout
+and firmware binaries updated against latest source.
+
+=== Features in v-2.3 ===
+
+Release V-2.3 has following additional features.
+
+   - support for SPEAr1310 RevC board
+   - Existing SPEAr1310 has been renamed as SPEAr1310_revA and
+     SPEAr1310_revC is referred as SPEAr1310 everywhere.
+
+=== Features in v-2.2 ===
+
+Release V-2.2 has following additional features.
+
+   - asciidoc based documentation support
+   - Updated firmware (u-boot) binary for SPEAr1340 device
+   - several small fixes
+
+=== Features in v-2.1 ===
+
+Release V-2.1 has following additional features.
+
+   - Faster file transfer due to enhanced Kermit implementation
+   - Support for SPEAr1340 device
+   - Support for Windows 7 64 bit, please refer installation on  Windows 7
+   - Command Interface to automate the flashing procedure
+   - saveenv command (U-Boot Command for USBTTY mode) to save environment 
+     either in flash (nor) or in nand memory
+

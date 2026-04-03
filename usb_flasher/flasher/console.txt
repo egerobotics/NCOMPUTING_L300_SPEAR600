@@ -1,0 +1,1149 @@
+nand info
+
+Device 0: NAND 128MiB 3,3V 8-bit, sector size 128 KiB
+u-boot> nand erase 0x00080000  0x60000
+
+NAND erase: device 0 offset 0x80000, size 0x60000
+Erasing at 0x80000 --  33% complete.Erasing at 0xa0000 --  66% complete.Erasing at 0xc0000 -- 100% complete.
+OK
+u-boot> nand write.jffs2 0x800000 0x00080000 0x60000
+
+NAND write: device 0 offset 0x80000, size 0x60000
+ 393216 bytes written: OK
+u-boot> loadb 0x800000 
+u-boot> imi
+
+## Checking Image at 00800000 ...
+Unknown image format!
+u-boot> nand info
+
+Device 0: NAND 128MiB 3,3V 8-bit, sector size 128 KiB
+u-boot> nand erase 0x00180000  0x20000
+
+NAND erase: device 0 offset 0x180000, size 0x20000
+Erasing at 0x180000 -- 100% complete.
+OK
+u-boot> nand write.jffs2 0x800000 0x00180000 0x20000
+
+NAND write: device 0 offset 0x180000, size 0x20000
+ 131072 bytes written: OK
+u-boot> loadb 0x800000
+## Ready for binary (kermit) download to 0x00800000 at 115200 bps...
+ 
+u-boot> imi
+
+## Checking Image at 00800000 ...
+Unknown image format!
+u-boot> nand info
+
+Device 0: NAND 128MiB 3,3V 8-bit, sector size 128 KiB
+u-boot> nand erase 0x00200000  0x3a0000
+
+NAND erase: device 0 offset 0x200000, size 0x3a0000
+Erasing at 0x200000 --   3% complete.Erasing at 0x220000 --   6% complete.Erasing at 0x240000 --  10% complete.Erasing at 0x260000 --  13% complete.Erasing at 0x280000 --  17% complete.Erasing at 0x2a0000 --  20% complete.Erasing at 0x2c0000 --  24% complete.Erasing at 0x2e0000 --  27% complete.Erasing at 0x300000 --  31% complete.Erasing at 0x320000 --  34% complete.Erasing at 0x340000 --  37% complete.Erasing at 0x360000 --  41% complete.Erasing at 0x380000 --  44% complete.Erasing at 0x3a0000 --  48% complete.Erasing at 0x3c0000 --  51% complete.Erasing at 0x3e0000 --  55% complete.Erasing at 0x400000 --  58% complete.Erasing at 0x420000 --  62% complete.Erasing at 0x440000 --  65% complete.Erasing at 0x460000 --  68% complete.Erasing at 0x480000 --  72% complete.Erasing at 0x4a0000 --  75% complete.Erasing at 0x4c0000 --  79% complete.Erasing at 0x4e0000 --  82% complete.Erasing at 0x500000 --  86% complete.Erasing at 0x520000 --  89% complete.Erasing at 0x540000 --  93% complete.Erasing at 0x560000 --  96% complete.Erasing at 0x580000 -- 100% complete.
+OK
+u-boot> nand write.jffs2 0x800000 0x00200000 0x3a0000
+
+NAND write: device 0 offset 0x200000, size 0x3a0000
+ 3801088 bytes written: OK
+u-boot> loadb  
+u-boot> imi
+
+## Checking Image at 00800000 ...
+Unknown image format!
+u-boot> nand info
+
+Device 0: NAND 128MiB 3,3V 8-bit, sector size 128 KiB
+u-boot> nand erase 0x01200000  0x140000
+
+NAND erase: device 0 offset 0x1200000, size 0x140000
+Erasing at 0x1200000 --  10% complete.Erasing at 0x1220000 --  20% complete.Erasing at 0x1240000 --  30% complete.Erasing at 0x1260000 --  40% complete.Erasing at 0x1280000 --  50% complete.Erasing at 0x12a0000 --  60% complete.Erasing at 0x12c0000 --  70% complete.Erasing at 0x12e0000 --  80% complete.Erasing at 0x1300000 --  90% complete.Erasing at 0x1320000 -- 100% complete.
+OK
+u-boot> nand write.jffs2 0x800000 0x01200000 0x140000
+
+NAND write: device 0 offset 0x1200000, size 0x140000
+ 1310720 bytes written: OK
+u-boot> imi
+
+## Checking Image at 00800000 ...
+Unknown image format!
+u-boot> nand info
+
+Device 0: NAND 128MiB 3,3V 8-bit, sector size 128 KiB
+u-boot> nand erase 0x10000  0x40000
+
+NAND erase: device 0 offset 0x10000, size 0x40000
+
+NAND 128MiB 3,3V 8-bit: MTD Erase failure: -22
+
+NAND 128MiB 3,3V 8-bit: MTD Erase failure: -22
+
+OK
+u-boot> nand write.jffs2 0x800000 0x10000 0x40000
+
+NAND write: device 0 offset 0x10000, size 0x40000
+NAND write to offset 20000 failed -5
+ 65536 bytes written: ERROR
+u-boot> loadb 0x8000 
+u-boot> imi
+
+## Checking Image at 00800000 ...
+Unknown image format!
+u-boot> nand info
+
+Device 0: NAND 128MiB 3,3V 8-bit, sector size 128 KiB
+u-boot> nand erase 0x20000  0x40000
+
+NAND erase: device 0 offset 0x20000, size 0x40000
+Erasing at 0x20000 --  50% complete.Erasing at 0x40000 -- 100% complete.
+OK
+u-boot> nand write.jffs2 0x800000 0x20000 0x40000
+
+NAND write: device 0 offset 0x20000, size 0x40000
+ 262144 bytes written: OK
+u-boot> loadb 0x800000 
+u-boot> imi
+
+## Checking Image at 00800000 ...
+   Legacy image found
+   Image Name:   Linux Kernel
+   Image Type:   ARM Linux Kernel Image (uncompressed)
+   Data Size:    3713904 Bytes = 3.5 MiB
+   Load Address: 00008000
+   Entry Point:  00008000
+   Verifying Checksum ... OK
+u-boot> nand info
+
+Device 0: NAND 128MiB 3,3V 8-bit, sector size 128 KiB
+u-boot> nand erase 0x80000  0x3a0000
+
+NAND erase: device 0 offset 0x80000, size 0x3a0000
+Erasing at 0x80000 --   3% complete.Erasing at 0xa0000 --   6% complete.Erasing at 0xc0000 --  10% complete.Erasing at 0xe0000 --  13% complete.Erasing at 0x100000 --  17% complete.Erasing at 0x120000 --  20% complete.Erasing at 0x140000 --  24% complete.Erasing at 0x160000 --  27% complete.Erasing at 0x180000 --  31% complete.Erasing at 0x1a0000 --  34% complete.Erasing at 0x1c0000 --  37% complete.Erasing at 0x1e0000 --  41% complete.Erasing at 0x200000 --  44% complete.Erasing at 0x220000 --  48% complete.Erasing at 0x240000 --  51% complete.Erasing at 0x260000 --  55% complete.Erasing at 0x280000 --  58% complete.Erasing at 0x2a0000 --  62% complete.Erasing at 0x2c0000 --  65% complete.Erasing at 0x2e0000 --  68% complete.Erasing at 0x300000 --  72% complete.Erasing at 0x320000 --  75% complete.Erasing at 0x340000 --  79% complete.Erasing at 0x360000 --  82% complete.Erasing at 0x380000 --  86% complete.Erasing at 0x3a0000 --  89% complete.Erasing at 0x3c0000 --  93% complete.Erasing at 0x3e0000 --  96% complete.Erasing at 0x400000 -- 100% complete.
+OK
+u-boot> nand write.jffs2 0x800000 0x80000 0x3a0000
+
+NAND write: device 0 offset 0x80000, size 0x3a0000
+ 3801088 bytes written: OK
+u-boot> loadb  
+u-boot> imi
+
+## Checking Image at 00800000 ...
+Unknown image format!
+u-boot> nand info
+
+Device 0: NAND 128MiB 3,3V 8-bit, sector size 128 KiB
+u-boot> nand erase 0x480000  0x20000
+
+NAND erase: device 0 offset 0x480000, size 0x20000
+Erasing at 0x480000 -- 100% complete.
+OK
+u-boot> nand write.jffs2 0x800000 0x480000 0x20000
+
+NAND write: device 0 offset 0x480000, size 0x20000
+ 131072 bytes written: OK
+u-boot> loa 
+u-boot> imi
+
+## Checking Image at 00800000 ...
+Unknown image format!
+u-boot> nand info
+
+Device 0: NAND 128MiB 3,3V 8-bit, sector size 128 KiB
+u-boot> nand erase 0x4A0000  0x140000
+
+NAND erase: device 0 offset 0x4a0000, size 0x140000
+Erasing at 0x4a0000 --  10% complete.Erasing at 0x4c0000 --  20% complete.Erasing at 0x4e0000 --  30% complete.Erasing at 0x500000 --  40% complete.Erasing at 0x520000 --  50% complete.Erasing at 0x540000 --  60% complete.Erasing at 0x560000 --  70% complete.Erasing at 0x580000 --  80% complete.Erasing at 0x5a0000 --  90% complete.Erasing at 0x5c0000 -- 100% complete.
+OK
+u-boot> nand write.jffs2 0x800000 0x4A0000 0x140000
+
+NAND write: device 0 offset 0x4a0000, size 0x140000
+ 1310720 bytes written: OK
+u-boot> setenv bootargs console=ttyAMA0,115200 mem=128M root=/dev/mtdblock7 rootfstype=jffs2
+u-boot> setenv bootcmd 'nand read.jffs2 0x1600000 0x80000 0x400000; nand read.jffs2 0x1000000 0x480000 0x20000; bootm 0x1600000 - 0x1000000'
+u-boot> saveenv
+saveenv - save environment variables to persistent storage
+
+Usage:
+saveenv flash <address>
+saveenv nand <offset>
+u-boot> saveenv nand 0x60000
+Saving Environment to nand...
+Erasing Nand...
+Warning: Erase size 0x00010000 smaller than one erase block 0x00020000
+         Erasing 0x00020000 instead
+Erasing at 0x60000 -- 100% complete.
+Writing to Nand... done
+u-boot> print bootcmd
+bootcmd=nand read.jffs2 0x1600000 0x80000 0x400000; nand read.jffs2 0x1000000 0x480000 0x20000; bootm 0x1600000 - 0x1000000
+u-boot> print bootargs
+bootargs=console=ttyAMA0,115200 mem=128M root=/dev/mtdblock7 rootfstype=jffs2
+u-boot> nand read.jffs2 0x1600000 0x80000 0x400000
+
+NAND read: device 0 offset 0x80000, size 0x400000
+ 4194304 bytes read: OK
+u-boot> nand read.jffs2 0x1000000 0x480000 0x20000
+
+NAND read: device 0 offset 0x480000, size 0x20000
+ 131072 bytes read: OK
+u-boot> imi 0x1600000
+
+## Checking Image at 01600000 ...
+   Legacy image found
+   Image Name:   Linux Kernel
+   Image Type:   ARM Linux Kernel Image (uncompressed)
+   Data Size:    3713904 Bytes = 3.5 MiB
+   Load Address: 00008000
+   Entry Point:  00008000
+   Verifying Checksum ... OK
+u-boot> version
+
+U-Boot 2010.03-lsp-3.2.4-rc1-00010-g7c31b03 (May 16 2012 - 14:27:30)-SPEAr
+u-boot> nand read.jffs2 0x1600000 0x80000 0x400000
+
+NAND read: device 0 offset 0x80000, size 0x400000
+ 4194304 bytes read: OK
+u-boot> imi 0x1600000
+
+## Checking Image at 01600000 ...
+   Legacy image found
+   Image Name:   Linux Kernel
+   Image Type:   ARM Linux Kernel Image (uncompressed)
+   Data Size:    3713904 Bytes = 3.5 MiB
+   Load Address: 00008000
+   Entry Point:  00008000
+   Verifying Checksum ... OK
+u-boot>  
+u-boot> imi
+
+## Checking Image at 00800000 ...
+Unknown image format!
+u-boot> nand info
+
+Device 0: NAND 128MiB 3,3V 8-bit, sector size 128 KiB
+u-boot> nand erase 0x80000  0x3a0000
+
+NAND erase: device 0 offset 0x80000, size 0x3a0000
+Erasing at 0x80000 --   3% complete.Erasing at 0xa0000 --   6% complete.Erasing at 0xc0000 --  10% complete.Erasing at 0xe0000 --  13% complete.Erasing at 0x100000 --  17% complete.Erasing at 0x120000 --  20% complete.Erasing at 0x140000 --  24% complete.Erasing at 0x160000 --  27% complete.Erasing at 0x180000 --  31% complete.Erasing at 0x1a0000 --  34% complete.Erasing at 0x1c0000 --  37% complete.Erasing at 0x1e0000 --  41% complete.Erasing at 0x200000 --  44% complete.Erasing at 0x220000 --  48% complete.Erasing at 0x240000 --  51% complete.Erasing at 0x260000 --  55% complete.Erasing at 0x280000 --  58% complete.Erasing at 0x2a0000 --  62% complete.Erasing at 0x2c0000 --  65% complete.Erasing at 0x2e0000 --  68% complete.Erasing at 0x300000 --  72% complete.Erasing at 0x320000 --  75% complete.Erasing at 0x340000 --  79% complete.Erasing at 0x360000 --  82% complete.Erasing at 0x380000 --  86% complete.Erasing at 0x3a0000 --  89% complete.Erasing at 0x3c0000 --  93% complete.Erasing at 0x3e0000 --  96% complete.Erasing at 0x400000 -- 100% complete.
+OK
+u-boot> nand write.jffs2 0x800000 0x80000 0x3a0000
+
+NAND write: device 0 offset 0x80000, size 0x3a0000
+ 3801088 bytes written: OK
+u-boot> loadb 0x80000 
+u-boot> imi
+
+## Checking Image at 00800000 ...
+   Legacy image found
+   Image Name:   Linux Kernel+DTB
+   Image Type:   ARM Linux Kernel Image (uncompressed)
+   Data Size:    3720145 Bytes = 3.5 MiB
+   Load Address: 00008000
+   Entry Point:  00008000
+   Verifying Checksum ... OK
+u-boot> nand info
+
+Device 0: NAND 128MiB 3,3V 8-bit, sector size 128 KiB
+u-boot> nand erase 0x80000  0x3a0000
+
+NAND erase: device 0 offset 0x80000, size 0x3a0000
+Erasing at 0x80000 --   3% complete.Erasing at 0xa0000 --   6% complete.Erasing at 0xc0000 --  10% complete.Erasing at 0xe0000 --  13% complete.Erasing at 0x100000 --  17% complete.Erasing at 0x120000 --  20% complete.Erasing at 0x140000 --  24% complete.Erasing at 0x160000 --  27% complete.Erasing at 0x180000 --  31% complete.Erasing at 0x1a0000 --  34% complete.Erasing at 0x1c0000 --  37% complete.Erasing at 0x1e0000 --  41% complete.Erasing at 0x200000 --  44% complete.Erasing at 0x220000 --  48% complete.Erasing at 0x240000 --  51% complete.Erasing at 0x260000 --  55% complete.Erasing at 0x280000 --  58% complete.Erasing at 0x2a0000 --  62% complete.Erasing at 0x2c0000 --  65% complete.Erasing at 0x2e0000 --  68% complete.Erasing at 0x300000 --  72% complete.Erasing at 0x320000 --  75% complete.Erasing at 0x340000 --  79% complete.Erasing at 0x360000 --  82% complete.Erasing at 0x380000 --  86% complete.Erasing at 0x3a0000 --  89% complete.Erasing at 0x3c0000 --  93% complete.Erasing at 0x3e0000 --  96% complete.Erasing at 0x400000 -- 100% complete.
+OK
+u-boot> nand write.jffs2 0x800000 0x80000 0x3a0000
+
+NAND write: device 0 offset 0x80000, size 0x3a0000
+ 3801088 bytes written: OK
+u-boot> nand read.jffs2 0x1600000 0x80000 0x400000
+
+NAND read: device 0 offset 0x80000, size 0x400000
+ 4194304 bytes read: OK
+u-boot>  
+u-boot> imi
+
+## Checking Image at 00800000 ...
+Unknown image format!
+u-boot> nand info
+
+Device 0: NAND 128MiB 3,3V 8-bit, sector size 128 KiB
+u-boot> nand erase 0x80000  0x3a0000
+
+NAND erase: device 0 offset 0x80000, size 0x3a0000
+Erasing at 0x80000 --   3% complete.Erasing at 0xa0000 --   6% complete.Erasing at 0xc0000 --  10% complete.Erasing at 0xe0000 --  13% complete.Erasing at 0x100000 --  17% complete.Erasing at 0x120000 --  20% complete.Erasing at 0x140000 --  24% complete.Erasing at 0x160000 --  27% complete.Erasing at 0x180000 --  31% complete.Erasing at 0x1a0000 --  34% complete.Erasing at 0x1c0000 --  37% complete.Erasing at 0x1e0000 --  41% complete.Erasing at 0x200000 --  44% complete.Erasing at 0x220000 --  48% complete.Erasing at 0x240000 --  51% complete.Erasing at 0x260000 --  55% complete.Erasing at 0x280000 --  58% complete.Erasing at 0x2a0000 --  62% complete.Erasing at 0x2c0000 --  65% complete.Erasing at 0x2e0000 --  68% complete.Erasing at 0x300000 --  72% complete.Erasing at 0x320000 --  75% complete.Erasing at 0x340000 --  79% complete.Erasing at 0x360000 --  82% complete.Erasing at 0x380000 --  86% complete.Erasing at 0x3a0000 --  89% complete.Erasing at 0x3c0000 --  93% complete.Erasing at 0x3e0000 --  96% complete.Erasing at 0x400000 -- 100% complete.
+OK
+u-boot> nand write.jffs2 0x800000 0x80000 0x3a0000
+
+NAND write: device 0 offset 0x80000, size 0x3a0000
+ 3801088 bytes written: OK
+u-boot> loadb 
+u-boot> imi
+
+## Checking Image at 00800000 ...
+   Legacy image found
+   Image Name:   Linux Kernel+DTB
+   Image Type:   ARM Linux Kernel Image (uncompressed)
+   Data Size:    3720606 Bytes = 3.5 MiB
+   Load Address: 00008000
+   Entry Point:  00008000
+   Verifying Checksum ... OK
+u-boot> nand erase 0x80000 0x3a0000
+
+NAND erase: device 0 offset 0x80000, size 0x3a0000
+Erasing at 0x80000 --   3% complete.Erasing at 0xa0000 --   6% complete.Erasing at 0xc0000 --  10% complete.Erasing at 0xe0000 --  13% complete.Erasing at 0x100000 --  17% complete.Erasing at 0x120000 --  20% complete.Erasing at 0x140000 --  24% complete.Erasing at 0x160000 --  27% complete.Erasing at 0x180000 --  31% complete.Erasing at 0x1a0000 --  34% complete.Erasing at 0x1c0000 --  37% complete.Erasing at 0x1e0000 --  41% complete.Erasing at 0x200000 --  44% complete.Erasing at 0x220000 --  48% complete.Erasing at 0x240000 --  51% complete.Erasing at 0x260000 --  55% complete.Erasing at 0x280000 --  58% complete.Erasing at 0x2a0000 --  62% complete.Erasing at 0x2c0000 --  65% complete.Erasing at 0x2e0000 --  68% complete.Erasing at 0x300000 --  72% complete.Erasing at 0x320000 --  75% complete.Erasing at 0x340000 --  79% complete.Erasing at 0x360000 --  82% complete.Erasing at 0x380000 --  86% complete.Erasing at 0x3a0000 --  89% complete.Erasing at 0x3c0000 --  93% complete.Erasing at 0x3e0000 --  96% complete.Erasing at 0x400000 -- 100% complete.
+OK
+u-boot> nand write.jffs2 0x800000 0x80000 0x3a0000
+
+NAND write: device 0 offset 0x80000, size 0x3a0000
+ 3801088 bytes written: OK
+u-boot> setenv bootargs console=ttyAMA0,115200 mem=128M root=mtd:rootfs rootfstype=jffs2
+u-boot> nand read.jffs2 0x1600000 0x80000 0x400000
+
+NAND read: device 0 offset 0x80000, size 0x400000
+ 4194304 bytes read: OK
+u-boot>  
+u-boot> imi
+
+## Checking Image at 00800000 ...
+Unknown image format!
+u-boot> loadb 0 
+u-boot> imi
+
+## Checking Image at 00800000 ...
+Unknown image format!
+u-boot> nand info
+
+Device 0: NAND 128MiB 3,3V 8-bit, sector size 128 KiB
+u-boot> nand erase 0x4A0000  0x140000
+
+NAND erase: device 0 offset 0x4a0000, size 0x140000
+Erasing at 0x4a0000 --  10% complete.Erasing at 0x4c0000 --  20% complete.Erasing at 0x4e0000 --  30% complete.Erasing at 0x500000 --  40% complete.Erasing at 0x520000 --  50% complete.Erasing at 0x540000 --  60% complete.Erasing at 0x560000 --  70% complete.Erasing at 0x580000 --  80% complete.Erasing at 0x5a0000 --  90% complete.Erasing at 0x5c0000 -- 100% complete.
+OK
+u-boot> nand write.jffs2 0x800000 0x4A0000 0x140000
+
+NAND write: device 0 offset 0x4a0000, size 0x140000
+ 1310720 bytes written: OK
+u-boot> setenv bootargs console=ttyAMA0,115200 mem=128M root=mtd:rootfs rootfstype=jffs2
+u-boot> nand read.jffs2 0x1600000 0x80000 0x400000
+
+NAND read: device 0 offset 0x80000, size 0x400000
+ 4194304 bytes read: OK
+u-boot> bootm 0x1600000
+## Booting kernel from Legacy Image at 01600000 ...
+   Image Name:   Linux Kernel+DTB
+   Image Type:   ARM Linux Kernel Image (uncompressed)
+   Data Size:    3720606 Bytes = 3.5 MiB
+   Load Address: 00008000
+   Entry Point:  00008000
+   Loading Kernel Image ... OK
+OK
+
+Starting kernel ...
+  Image Type:    0 offset 0x80000, size 0x400000
+Å#Y#BàD#@#@#@#]û÷#Ø#B#@#@#@#A#@#@#@íA#@#@#@#@#@#@#@#@#@#@ uÉi uÉi uÉi#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@ì#Ë¢Y#Å#Y#Aà+#@#@#@æn&}#A#@#@#@#A#@#@#@#C#@#@#@#ÁøÈi#C#D#@#@#J#G´#H#W(2
+## Command too long!
+u-boot>                   "      2      B      R      b      r                                                                                                                              version
+
+U-Boot 2010.03-lsp-3.2.4-rc1-00010-g7c31b03 (May 16 2012 - 14:27:30)-SPEAr
+u-boot> nand erase 0x4A0000 0x7B60000
+
+NAND erase: device 0 offset 0x4a0000, size 0x7b60000
+Erasing at 0x4a0000 --   0% complete.Erasing at 0x5c0000 --   1% complete.Erasing at 0x700000 --   2% complete.Erasing at 0x840000 --   3% complete.Erasing at 0x980000 --   4% complete.Erasing at 0xac0000 --   5% complete.Erasing at 0xc00000 --   6% complete.Erasing at 0xd40000 --   7% complete.Erasing at 0xe60000 --   8% complete.Erasing at 0xfa0000 --   9% complete.Erasing at 0x10e0000 --  10% complete.Erasing at 0x1220000 --  11% complete.Erasing at 0x1360000 --  12% complete.Erasing at 0x14a0000 --  13% complete.Erasing at 0x15e0000 --  14% complete.Erasing at 0x1720000 --  15% complete.Erasing at 0x1840000 --  16% complete.Erasing at 0x1980000 --  17% complete.Erasing at 0x1ac0000 --  18% complete.Erasing at 0x1c00000 --  19% complete.Erasing at 0x1d40000 --  20% complete.Erasing at 0x1e80000 --  21% complete.Erasing at 0x1fc0000 --  22% complete.Erasing at 0x2100000 --  23% complete.Erasing at 0x2220000 --  24% complete.Erasing at 0x2360000 --  25% complete.Erasing at 0x24a0000 --  26% complete.Erasing at 0x25e0000 --  27% complete.Erasing at 0x2720000 --  28% complete.Erasing at 0x2860000 --  29% complete.Erasing at 0x29a0000 --  30% complete.Erasing at 0x2ac0000 --  31% complete.Erasing at 0x2c00000 --  32% complete.Erasing at 0x2d40000 --  33% complete.Erasing at 0x2e80000 --  34% complete.Erasing at 0x2fc0000 --  35% complete.Erasing at 0x3100000 --  36% complete.Erasing at 0x3240000 --  37% complete.Erasing at 0x3380000 --  38% complete.Erasing at 0x34a0000 --  39% complete.Erasing at 0x35e0000 --  40% complete.Erasing at 0x3720000 --  41% complete.Erasing at 0x3860000 --  42% complete.Erasing at 0x39a0000 --  43% complete.Erasing at 0x3ae0000 --  44% complete.Erasing at 0x3c20000 --  45% complete.Erasing at 0x3d60000 --  46% complete.Erasing at 0x3e80000 --  47% complete.Erasing at 0x3fc0000 --  48% complete.Erasing at 0x4100000 --  49% complete.Erasing at 0x4240000 --  50% complete.Erasing at 0x4380000 --  51% complete.Erasing at 0x44c0000 --  52% complete.Erasing at 0x4600000 --  53% complete.Erasing at 0x4720000 --  54% complete.Erasing at 0x4860000 --  55% complete.Erasing at 0x49a0000 --  56% complete.Erasing at 0x4ae0000 --  57% complete.Erasing at 0x4c20000 --  58% complete.Erasing at 0x4d60000 --  59% complete.Erasing at 0x4ea0000 --  60% complete.Erasing at 0x4fe0000 --  61% complete.Erasing at 0x5100000 --  62% complete.Erasing at 0x5240000 --  63% complete.Erasing at 0x5380000 --  64% complete.Erasing at 0x54c0000 --  65% complete.Erasing at 0x5600000 --  66% complete.Erasing at 0x5740000 --  67% complete.Erasing at 0x5880000 --  68% complete.Erasing at 0x59c0000 --  69% complete.Erasing at 0x5ae0000 --  70% complete.Erasing at 0x5c20000 --  71% complete.Erasing at 0x5d60000 --  72% complete.Erasing at 0x5ea0000 --  73% complete.Erasing at 0x5fe0000 --  74% complete.Erasing at 0x6120000 --  75% complete.Erasing at 0x6260000 --  76% complete.Erasing at 0x6380000 --  77% complete.Erasing at 0x64c0000 --  78% complete.Erasing at 0x6600000 --  79% complete.Erasing at 0x6740000 --  80% complete.Erasing at 0x6880000 --  81% complete.Erasing at 0x69c0000 --  82% complete.Erasing at 0x6b00000 --  83% complete.Erasing at 0x6c40000 --  84% complete.Erasing at 0x6d60000 --  85% complete.Erasing at 0x6ea0000 --  86% complete.Erasing at 0x6fe0000 --  87% complete.Erasing at 0x7120000 --  88% complete.Erasing at 0x7260000 --  89% complete.Erasing at 0x73a0000 --  90% complete.Erasing at 0x74e0000 --  91% complete.Erasing at 0x7620000 --  92% complete.Erasing at 0x7740000 --  93% complete.Erasing at 0x7880000 --  94% complete.Erasing at 0x79c0000 --  95% complete.Erasing at 0x7b00000 --  96% complete.Erasing at 0x7c40000 --  97% complete.Erasing at 0x7d80000 --  98% complete.Erasing at 0x7ec0000 --  99% complete.Erasing at 0x7fe0000 -- 100% complete.
+OK
+u-boot> loadb 
+u-boot> imi
+
+## Checking Image at 00800000 ...
+Unknown image format!
+u-boot> md.b 0x800000 0x20
+00800000: 85 19 01 e0 2b 00 00 00 e6 6e 26 7d 01 00 00 00    ....+....n&}....
+00800010: 00 00 00 00 02 00 00 00 a0 75 c9 69 03 04 00 00    .........u.i....
+u-boot> nand write.jffs2 0x800000 0x4A0000 0x140000
+
+NAND write: device 0 offset 0x4a0000, size 0x140000
+ 1310720 bytes written: OK
+u-boot> nand read.jffs2 0x1600000 0x4A0000 0x140000
+
+NAND read: device 0 offset 0x4a0000, size 0x140000
+ 1310720 bytes read: OK
+u-boot> cmp.b 0x800000 0x1600000 0x131754
+Total of 1251156 bytes were the same
+u-boot> loadb 0x800000 
+u-boot> imi
+
+## Checking Image at 00800000 ...
+   Legacy image found
+   Image Name:   Linux+initramfs+DTB
+   Image Type:   ARM Linux Kernel Image (uncompressed)
+   Data Size:    4629550 Bytes = 4.4 MiB
+   Load Address: 00008000
+   Entry Point:  00008000
+   Verifying Checksum ... OK
+u-boot> nand info
+
+Device 0: NAND 128MiB 3,3V 8-bit, sector size 128 KiB
+u-boot> nand erase 0x80000  0x480000
+
+NAND erase: device 0 offset 0x80000, size 0x480000
+Erasing at 0x80000 --   2% complete.Erasing at 0xa0000 --   5% complete.Erasing at 0xc0000 --   8% complete.Erasing at 0xe0000 --  11% complete.Erasing at 0x100000 --  13% complete.Erasing at 0x120000 --  16% complete.Erasing at 0x140000 --  19% complete.Erasing at 0x160000 --  22% complete.Erasing at 0x180000 --  25% complete.Erasing at 0x1a0000 --  27% complete.Erasing at 0x1c0000 --  30% complete.Erasing at 0x1e0000 --  33% complete.Erasing at 0x200000 --  36% complete.Erasing at 0x220000 --  38% complete.Erasing at 0x240000 --  41% complete.Erasing at 0x260000 --  44% complete.Erasing at 0x280000 --  47% complete.Erasing at 0x2a0000 --  50% complete.Erasing at 0x2c0000 --  52% complete.Erasing at 0x2e0000 --  55% complete.Erasing at 0x300000 --  58% complete.Erasing at 0x320000 --  61% complete.Erasing at 0x340000 --  63% complete.Erasing at 0x360000 --  66% complete.Erasing at 0x380000 --  69% complete.Erasing at 0x3a0000 --  72% complete.Erasing at 0x3c0000 --  75% complete.Erasing at 0x3e0000 --  77% complete.Erasing at 0x400000 --  80% complete.Erasing at 0x420000 --  83% complete.Erasing at 0x440000 --  86% complete.Erasing at 0x460000 --  88% complete.Erasing at 0x480000 --  91% complete.Erasing at 0x4a0000 --  94% complete.Erasing at 0x4c0000 --  97% complete.Erasing at 0x4e0000 -- 100% complete.
+OK
+u-boot> nand write.jffs2 0x800000 0x80000 0x480000
+
+NAND write: device 0 offset 0x80000, size 0x480000
+ 4718592 bytes written: OK
+u-boot> setenv bootargs console=ttyAMA0,115200 mem=128M
+u-boot> nand read.jffs2 0x1600000 0x80000 0x480000
+
+NAND read: device 0 offset 0x80000, size 0x480000
+ 4718592 bytes read: OK
+u-boot>  
+u-boot> imi
+
+## Checking Image at 00800000 ...
+Unknown image format!
+u-boot> loadb 0x8 
+u-boot> imi
+
+## Checking Image at 00800000 ...
+   Legacy image found
+   Image Name:   XLOADER
+   Image Type:   ARM Linux Firmware (uncompressed)
+   Data Size:    1788 Bytes = 1.7 KiB
+   Load Address: d2800b00
+   Entry Point:  d2800b00
+   Verifying Checksum ... OK
+u-boot> nand info
+
+Device 0: NAND 128MiB 3,3V 8-bit, sector size 128 KiB
+u-boot> nand erase 0x0  0x20000
+
+NAND erase: device 0 offset 0x0, size 0x20000
+Erasing at 0x0 -- 100% complete.
+OK
+u-boot> nand write.jffs2 0x800000 0x0 0x20000
+
+NAND write: device 0 offset 0x0, size 0x20000
+ 131072 bytes written: OK
+u-boot> setenv bootargs console=ttyAMA0,115200 mem=128M
+u-boot> setenv bootcmd 'nand read.jffs2 0x1600000 0x80000 0x480000; bootm 0x1600000'
+u-boot> setenv bootdelay 3
+u-boot> saveenv nand 0x60000
+Saving Environment to nand...
+Erasing Nand...
+Warning: Erase size 0x00010000 smaller than one erase block 0x00020000
+         Erasing 0x00020000 instead
+Erasing at 0x60000 -- 100% complete.
+Writing to Nand... done
+u-boot> print bootcmd
+bootcmd=nand read.jffs2 0x1600000 0x80000 0x480000; bootm 0x1600000
+u-boot> print bootargs
+bootargs=console=ttyAMA0,115200 mem=128M
+u-boot>  
+u-boot> imi
+
+## Checking Image at 00800000 ...
+Unknown image format!
+u-boot> nand info
+
+Device 0: NAND 128MiB 3,3V 8-bit, sector size 128 KiB
+u-boot> nand erase 0x80000  0x4e0000
+
+NAND erase: device 0 offset 0x80000, size 0x4e0000
+Erasing at 0x80000 --   2% complete.Erasing at 0xa0000 --   5% complete.Erasing at 0xc0000 --   7% complete.Erasing at 0xe0000 --  10% complete.Erasing at 0x100000 --  12% complete.Erasing at 0x120000 --  15% complete.Erasing at 0x140000 --  17% complete.Erasing at 0x160000 --  20% complete.Erasing at 0x180000 --  23% complete.Erasing at 0x1a0000 --  25% complete.Erasing at 0x1c0000 --  28% complete.Erasing at 0x1e0000 --  30% complete.Erasing at 0x200000 --  33% complete.Erasing at 0x220000 --  35% complete.Erasing at 0x240000 --  38% complete.Erasing at 0x260000 --  41% complete.Erasing at 0x280000 --  43% complete.Erasing at 0x2a0000 --  46% complete.Erasing at 0x2c0000 --  48% complete.Erasing at 0x2e0000 --  51% complete.Erasing at 0x300000 --  53% complete.Erasing at 0x320000 --  56% complete.Erasing at 0x340000 --  58% complete.Erasing at 0x360000 --  61% complete.Erasing at 0x380000 --  64% complete.Erasing at 0x3a0000 --  66% complete.Erasing at 0x3c0000 --  69% complete.Erasing at 0x3e0000 --  71% complete.Erasing at 0x400000 --  74% complete.Erasing at 0x420000 --  76% complete.Erasing at 0x440000 --  79% complete.Erasing at 0x460000 --  82% complete.Erasing at 0x480000 --  84% complete.Erasing at 0x4a0000 --  87% complete.Erasing at 0x4c0000 --  89% complete.Erasing at 0x4e0000 --  92% complete.Erasing at 0x500000 --  94% complete.Erasing at 0x520000 --  97% complete.Erasing at 0x540000 -- 100% complete.
+OK
+u-boot> nand write.jffs2 0x800000 0x80000 0x4e0000
+
+NAND write: device 0 offset 0x80000, size 0x4e0000
+ 5111808 bytes written: OK
+u-boot> loadb 0x800000
+## Ready for binary (kermit) download to 0x00800000 at 115200 bps...
+ 
+u-boot> imi
+
+## Checking Image at 00800000 ...
+   Legacy image found
+   Image Name:   Linux+initramfs+DTB
+   Image Type:   ARM Linux Kernel Image (uncompressed)
+   Data Size:    5077286 Bytes = 4.8 MiB
+   Load Address: 00008000
+   Entry Point:  00008000
+   Verifying Checksum ... OK
+u-boot> nand erase 0x80000 0x500000
+
+NAND erase: device 0 offset 0x80000, size 0x500000
+Erasing at 0x80000 --   2% complete.Erasing at 0xa0000 --   5% complete.Erasing at 0xc0000 --   7% complete.Erasing at 0xe0000 --  10% complete.Erasing at 0x100000 --  12% complete.Erasing at 0x120000 --  15% complete.Erasing at 0x140000 --  17% complete.Erasing at 0x160000 --  20% complete.Erasing at 0x180000 --  22% complete.Erasing at 0x1a0000 --  25% complete.Erasing at 0x1c0000 --  27% complete.Erasing at 0x1e0000 --  30% complete.Erasing at 0x200000 --  32% complete.Erasing at 0x220000 --  35% complete.Erasing at 0x240000 --  37% complete.Erasing at 0x260000 --  40% complete.Erasing at 0x280000 --  42% complete.Erasing at 0x2a0000 --  45% complete.Erasing at 0x2c0000 --  47% complete.Erasing at 0x2e0000 --  50% complete.Erasing at 0x300000 --  52% complete.Erasing at 0x320000 --  55% complete.Erasing at 0x340000 --  57% complete.Erasing at 0x360000 --  60% complete.Erasing at 0x380000 --  62% complete.Erasing at 0x3a0000 --  65% complete.Erasing at 0x3c0000 --  67% complete.Erasing at 0x3e0000 --  70% complete.Erasing at 0x400000 --  72% complete.Erasing at 0x420000 --  75% complete.Erasing at 0x440000 --  77% complete.Erasing at 0x460000 --  80% complete.Erasing at 0x480000 --  82% complete.Erasing at 0x4a0000 --  85% complete.Erasing at 0x4c0000 --  87% complete.Erasing at 0x4e0000 --  90% complete.Erasing at 0x500000 --  92% complete.Erasing at 0x520000 --  95% complete.Erasing at 0x540000 --  97% complete.Erasing at 0x560000 -- 100% complete.
+OK
+u-boot> nand write.jffs2 0x800000 0x80000 0x500000
+
+NAND write: device 0 offset 0x80000, size 0x500000
+ 5242880 bytes written: OK
+u-boot> setenv bootcmd 'nand read.jffs2 0x1600000 0x80000 0x500000; bootm 0x1600000'
+u-boot> setenv bootargs console=ttyAMA0,115200 mem=128M
+u-boot> saveenv nand 0x60000
+Saving Environment to nand...
+Erasing Nand...
+Warning: Erase size 0x00010000 smaller than one erase block 0x00020000
+         Erasing 0x00020000 instead
+Erasing at 0x60000 -- 100% complete.
+Writing to Nand... done
+u-boot> nand read.jffs2 0x1600000 0x80000 0x500000
+
+NAND read: device 0 offset 0x80000, size 0x500000
+ 5242880 bytes read: OK
+u-boot> bootm 0x1600000
+## Booting kernel from Legacy Image at 01600000 ...
+   Image Name:   Linux+initramfs+DTB
+   Image Type:   ARM Linux Kernel Image (uncompressed)
+   Data Size:    5077286 Bytes = 4.8 MiB
+   Load Address: 00008000
+   Entry Point:  00008000
+   Loading Kernel Image ... OK
+OK
+
+Starting kernel ...
+  Linux Kernel Image (uncompressed)
+ffset 0x80000, size 0x500000
+
+
+## Command too long!
+u-boot> Y          PO®Y          ¹Y           fY          E©Y          àc¸Y          ÐqY          ð~Y          PÜ´Y          ð+¿Y          Ð·Y          ð²Y           Q£Y          ÐöWY          ¼Y          0°¬Y          ðiY           Y          Z          ,µY          °u­Y           aY          p~Y          °fY          °	«Y          PzbY          ÀYY          `ü`Y          p»¬Y          
+u-boot> imi
+
+## Checking Image at 00800000 ...
+Unknown image format!
+u-boot> loadb 0x8000 
+u-boot> imi
+
+## Checking Image at 00800000 ...
+   Legacy image found
+   Image Name:   Linux+initramfs+DTB
+   Image Type:   ARM Linux Kernel Image (uncompressed)
+   Data Size:    5077264 Bytes = 4.8 MiB
+   Load Address: 00008000
+   Entry Point:  00008000
+   Verifying Checksum ... OK
+u-boot> nand erase 0x80000 0x500000
+
+NAND erase: device 0 offset 0x80000, size 0x500000
+Erasing at 0x80000 --   2% complete.Erasing at 0xa0000 --   5% complete.Erasing at 0xc0000 --   7% complete.Erasing at 0xe0000 --  10% complete.Erasing at 0x100000 --  12% complete.Erasing at 0x120000 --  15% complete.Erasing at 0x140000 --  17% complete.Erasing at 0x160000 --  20% complete.Erasing at 0x180000 --  22% complete.Erasing at 0x1a0000 --  25% complete.Erasing at 0x1c0000 --  27% complete.Erasing at 0x1e0000 --  30% complete.Erasing at 0x200000 --  32% complete.Erasing at 0x220000 --  35% complete.Erasing at 0x240000 --  37% complete.Erasing at 0x260000 --  40% complete.Erasing at 0x280000 --  42% complete.Erasing at 0x2a0000 --  45% complete.Erasing at 0x2c0000 --  47% complete.Erasing at 0x2e0000 --  50% complete.Erasing at 0x300000 --  52% complete.Erasing at 0x320000 --  55% complete.Erasing at 0x340000 --  57% complete.Erasing at 0x360000 --  60% complete.Erasing at 0x380000 --  62% complete.Erasing at 0x3a0000 --  65% complete.Erasing at 0x3c0000 --  67% complete.Erasing at 0x3e0000 --  70% complete.Erasing at 0x400000 --  72% complete.Erasing at 0x420000 --  75% complete.Erasing at 0x440000 --  77% complete.Erasing at 0x460000 --  80% complete.Erasing at 0x480000 --  82% complete.Erasing at 0x4a0000 --  85% complete.Erasing at 0x4c0000 --  87% complete.Erasing at 0x4e0000 --  90% complete.Erasing at 0x500000 --  92% complete.Erasing at 0x520000 --  95% complete.Erasing at 0x540000 --  97% complete.Erasing at 0x560000 -- 100% complete.
+OK
+u-boot> nand write.jffs2 0x800000 0x80000 0x500000
+
+NAND write: device 0 offset 0x80000, size 0x500000
+ 5242880 bytes written: OK
+u-boot> setenv bootargs console=ttyAMA0,115200 mem=128M
+u-boot> nand read.jffs2 0x1600000 0x80000 0x500000
+
+NAND read: device 0 offset 0x80000, size 0x500000
+ 5242880 bytes read: OK
+u-boot> loadb 0x8 
+u-boot> imi
+
+## Checking Image at 00800000 ...
+   Legacy image found
+   Image Name:   Linux+initramfs+DTB
+   Image Type:   ARM Linux Kernel Image (uncompressed)
+   Data Size:    5191440 Bytes = 5 MiB
+   Load Address: 00008000
+   Entry Point:  00008000
+   Verifying Checksum ... OK
+u-boot> nand erase 0x80000 0x500000
+
+NAND erase: device 0 offset 0x80000, size 0x500000
+Erasing at 0x80000 --   2% complete.Erasing at 0xa0000 --   5% complete.Erasing at 0xc0000 --   7% complete.Erasing at 0xe0000 --  10% complete.Erasing at 0x100000 --  12% complete.Erasing at 0x120000 --  15% complete.Erasing at 0x140000 --  17% complete.Erasing at 0x160000 --  20% complete.Erasing at 0x180000 --  22% complete.Erasing at 0x1a0000 --  25% complete.Erasing at 0x1c0000 --  27% complete.Erasing at 0x1e0000 --  30% complete.Erasing at 0x200000 --  32% complete.Erasing at 0x220000 --  35% complete.Erasing at 0x240000 --  37% complete.Erasing at 0x260000 --  40% complete.Erasing at 0x280000 --  42% complete.Erasing at 0x2a0000 --  45% complete.Erasing at 0x2c0000 --  47% complete.Erasing at 0x2e0000 --  50% complete.Erasing at 0x300000 --  52% complete.Erasing at 0x320000 --  55% complete.Erasing at 0x340000 --  57% complete.Erasing at 0x360000 --  60% complete.Erasing at 0x380000 --  62% complete.Erasing at 0x3a0000 --  65% complete.Erasing at 0x3c0000 --  67% complete.Erasing at 0x3e0000 --  70% complete.Erasing at 0x400000 --  72% complete.Erasing at 0x420000 --  75% complete.Erasing at 0x440000 --  77% complete.Erasing at 0x460000 --  80% complete.Erasing at 0x480000 --  82% complete.Erasing at 0x4a0000 --  85% complete.Erasing at 0x4c0000 --  87% complete.Erasing at 0x4e0000 --  90% complete.Erasing at 0x500000 --  92% complete.Erasing at 0x520000 --  95% complete.Erasing at 0x540000 --  97% complete.Erasing at 0x560000 -- 100% complete.
+OK
+u-boot> nand write.jffs2 0x800000 0x80000 0x500000
+
+NAND write: device 0 offset 0x80000, size 0x500000
+ 5242880 bytes written: OK
+u-boot> setenv bootargs console=ttyAMA0,115200 mem=128M
+u-boot> nand read.jffs2 0x1600000 0x80000 0x500000
+
+NAND read: device 0 offset 0x80000, size 0x500000
+ 5242880 bytes read: OK
+u-boot>  
+u-boot> imi
+
+## Checking Image at 00800000 ...
+Unknown image format!
+u-boot>  
+u-boot> imi
+
+## Checking Image at 00800000 ...
+Unknown image format!
+u-boot> loadb 0x800000 
+u-boot> imi
+
+## Checking Image at 00800000 ...
+   Legacy image found
+   Image Name:   Linux+initramfs+DTB
+   Image Type:   ARM Linux Kernel Image (uncompressed)
+   Data Size:    5307152 Bytes = 5.1 MiB
+   Load Address: 00008000
+   Entry Point:  00008000
+   Verifying Checksum ... OK
+u-boot> nand erase 0x80000 0x540000
+
+NAND erase: device 0 offset 0x80000, size 0x540000
+Erasing at 0x80000 --   2% complete.Erasing at 0xa0000 --   4% complete.Erasing at 0xc0000 --   7% complete.Erasing at 0xe0000 --   9% complete.Erasing at 0x100000 --  11% complete.Erasing at 0x120000 --  14% complete.Erasing at 0x140000 --  16% complete.Erasing at 0x160000 --  19% complete.Erasing at 0x180000 --  21% complete.Erasing at 0x1a0000 --  23% complete.Erasing at 0x1c0000 --  26% complete.Erasing at 0x1e0000 --  28% complete.Erasing at 0x200000 --  30% complete.Erasing at 0x220000 --  33% complete.Erasing at 0x240000 --  35% complete.Erasing at 0x260000 --  38% complete.Erasing at 0x280000 --  40% complete.Erasing at 0x2a0000 --  42% complete.Erasing at 0x2c0000 --  45% complete.Erasing at 0x2e0000 --  47% complete.Erasing at 0x300000 --  50% complete.Erasing at 0x320000 --  52% complete.Erasing at 0x340000 --  54% complete.Erasing at 0x360000 --  57% complete.Erasing at 0x380000 --  59% complete.Erasing at 0x3a0000 --  61% complete.Erasing at 0x3c0000 --  64% complete.Erasing at 0x3e0000 --  66% complete.Erasing at 0x400000 --  69% complete.Erasing at 0x420000 --  71% complete.Erasing at 0x440000 --  73% complete.Erasing at 0x460000 --  76% complete.Erasing at 0x480000 --  78% complete.Erasing at 0x4a0000 --  80% complete.Erasing at 0x4c0000 --  83% complete.Erasing at 0x4e0000 --  85% complete.Erasing at 0x500000 --  88% complete.Erasing at 0x520000 --  90% complete.Erasing at 0x540000 --  92% complete.Erasing at 0x560000 --  95% complete.Erasing at 0x580000 --  97% complete.Erasing at 0x5a0000 -- 100% complete.
+OK
+u-boot> nand write.jffs2 0x800000 0x80000 0x540000
+
+NAND write: device 0 offset 0x80000, size 0x540000
+ 5505024 bytes written: OK
+u-boot> setenv bootargs console=ttyAMA0,115200 mem=128M
+u-boot> nand read.jffs2 0x1600000 0x80000 0x540000
+
+NAND read: device 0 offset 0x80000, size 0x540000
+ 5505024 bytes read: OK
+u-boot> bootm 0x1600000
+Wrong Image Format for bootm command
+ERROR: can't get kernel image!
+u-boot> version
+
+U-Boot 2010.03-lsp-3.2.4-rc1-00010-g7c31b03 (May 16 2012 - 14:27:30)-SPEAr
+u-boot> setenv bootargs console=ttyAMA0,115200 mem=128M
+u-boot> nand read.jffs2 0x1600000 0x80000 0x540000
+
+NAND read: device 0 offset 0x80000, size 0x540000
+ 5505024 bytes read: OK
+u-boot> imi 0x1600000
+
+## Checking Image at 01600000 ...
+   Legacy image found
+   Image Name:   Linux+initramfs+DTB
+   Image Type:   ARM Linux Kernel Image (uncompressed)
+   Data Size:    5307152 Bytes = 5.1 MiB
+   Load Address: 00008000
+   Entry Point:  00008000
+   Verifying Checksum ... OK
+u-boot> loadb 0x80 
+u-boot> imi
+
+## Checking Image at 00800000 ...
+Unknown image format!
+u-boot> loadb 0x800000
+## Ready for binary (kermit) download to 0x00800000 at 115200 bps...
+ 
+u-boot> imi
+
+## Checking Image at 00800000 ...
+   Legacy image found
+   Image Name:   Linux+initramfs+DTB
+   Image Type:   ARM Linux Kernel Image (uncompressed)
+   Data Size:    5377320 Bytes = 5.1 MiB
+   Load Address: 00008000
+   Entry Point:  00008000
+   Verifying Checksum ... OK
+u-boot> nand erase 0x80000 0x540000
+
+NAND erase: device 0 offset 0x80000, size 0x540000
+Erasing at 0x80000 --   2% complete.Erasing at 0xa0000 --   4% complete.Erasing at 0xc0000 --   7% complete.Erasing at 0xe0000 --   9% complete.Erasing at 0x100000 --  11% complete.Erasing at 0x120000 --  14% complete.Erasing at 0x140000 --  16% complete.Erasing at 0x160000 --  19% complete.Erasing at 0x180000 --  21% complete.Erasing at 0x1a0000 --  23% complete.Erasing at 0x1c0000 --  26% complete.Erasing at 0x1e0000 --  28% complete.Erasing at 0x200000 --  30% complete.Erasing at 0x220000 --  33% complete.Erasing at 0x240000 --  35% complete.Erasing at 0x260000 --  38% complete.Erasing at 0x280000 --  40% complete.Erasing at 0x2a0000 --  42% complete.Erasing at 0x2c0000 --  45% complete.Erasing at 0x2e0000 --  47% complete.Erasing at 0x300000 --  50% complete.Erasing at 0x320000 --  52% complete.Erasing at 0x340000 --  54% complete.Erasing at 0x360000 --  57% complete.Erasing at 0x380000 --  59% complete.Erasing at 0x3a0000 --  61% complete.Erasing at 0x3c0000 --  64% complete.Erasing at 0x3e0000 --  66% complete.Erasing at 0x400000 --  69% complete.Erasing at 0x420000 --  71% complete.Erasing at 0x440000 --  73% complete.Erasing at 0x460000 --  76% complete.Erasing at 0x480000 --  78% complete.Erasing at 0x4a0000 --  80% complete.Erasing at 0x4c0000 --  83% complete.Erasing at 0x4e0000 --  85% complete.Erasing at 0x500000 --  88% complete.Erasing at 0x520000 --  90% complete.Erasing at 0x540000 --  92% complete.Erasing at 0x560000 --  95% complete.Erasing at 0x580000 --  97% complete.Erasing at 0x5a0000 -- 100% complete.
+OK
+u-boot> nand write.jffs2 0x800000 0x80000 0x540000
+
+NAND write: device 0 offset 0x80000, size 0x540000
+ 5505024 bytes written: OK
+u-boot> setenv bootargs console=ttyAMA0,115200 mem=128M
+u-boot> nand read.jffs2 0x1600000 0x80000 0x540000
+
+NAND read: device 0 offset 0x80000, size 0x540000
+ 5505024 bytes read: OK
+u-boot> version
+
+U-Boot 2010.03-lsp-3.2.4-rc1-00010-g7c31b03 (May 16 2012 - 14:27:30)-SPEAr
+u-boot> setenv bootargs console=ttyAMA0,115200 mem=128M
+u-boot> nand read.jffs2 0x1600000 0x80000 0x540000
+
+NAND read: device 0 offset 0x80000, size 0x540000
+ 5505024 bytes read: OK
+u-boot> setenv bootargs console=ttyAMA0,115200 mem=128M
+u-boot> nand 540000
+
+NAND read: device 0 offset 0x80000, size 0x540000
+ 5505024 bytes read: OK
+u-boot> Abootm 0x1600000
+Unknown command 'Tbootm' - try 'help'
+u-boot> sole=ttM
+u-boot>  
+Unknown command '~' - try 'help'
+u-boot> nand read.jffs2 0x1600000 0x80000 0x540000
+
+NAND read: device 0 offset 0x80000, size 0x540000
+ 5505024 bytes read: OK
+u-boot> version
+
+U-Boot 2010.03-lsp-3.2.4-rc1-00010-g7c31b03 (May 16 2012 - 14:27:30)-SPEAr
+u-boot> load 
+u-boot> imi
+
+## Checking Image at 00800000 ...
+   Legacy image found
+   Image Name:   XLOADER
+   Image Type:   ARM Linux Firmware (uncompressed)
+   Data Size:    1788 Bytes = 1.7 KiB
+   Load Address: d2800b00
+   Entry Point:  d2800b00
+   Verifying Checksum ... OK
+u-boot> nand info
+
+Device 0: NAND 128MiB 3,3V 8-bit, sector size 128 KiB
+u-boot> nand erase 0x0  0x20000
+
+NAND erase: device 0 offset 0x0, size 0x20000
+Erasing at 0x0 -- 100% complete.
+OK
+u-boot> nand write.jffs2 0x800000 0x0 0x20000
+
+NAND write: device 0 offset 0x0, size 0x20000
+ 131072 bytes written: OK
+u-boot> loadb 0x8000 
+u-boot> imi
+
+## Checking Image at 00800000 ...
+   Legacy image found
+   Image Name:   U-Boot 2010.03-lsp-3.2.4-rc1-000
+   Image Type:   ARM Linux Firmware (uncompressed)
+   Data Size:    137868 Bytes = 134.6 KiB
+   Load Address: 00700000
+   Entry Point:  00000000
+   Verifying Checksum ... OK
+u-boot> nand info
+
+Device 0: NAND 128MiB 3,3V 8-bit, sector size 128 KiB
+u-boot> nand erase 0x10000  0x40000
+
+NAND erase: device 0 offset 0x10000, size 0x40000
+
+NAND 128MiB 3,3V 8-bit: MTD Erase failure: -22
+
+NAND 128MiB 3,3V 8-bit: MTD Erase failure: -22
+
+OK
+u-boot> nand write.jffs2 0x800000 0x10000 0x40000
+
+NAND write: device 0 offset 0x10000, size 0x40000
+NAND write to offset 10000 failed -5
+ 0 bytes written: ERROR
+u-boot> nand erase 0x0 0x60000
+
+NAND erase: device 0 offset 0x0, size 0x60000
+Erasing at 0x0 --  33% complete.Erasing at 0x20000 --  66% complete.Erasing at 0x40000 -- 100% complete.
+OK
+u-boot> loadb 0x800000 
+u-boot> imi
+
+## Checking Image at 00800000 ...
+   Legacy image found
+   Image Name:   XLOADER
+   Image Type:   ARM Linux Firmware (uncompressed)
+   Data Size:    1788 Bytes = 1.7 KiB
+   Load Address: d2800b00
+   Entry Point:  d2800b00
+   Verifying Checksum ... OK
+u-boot> nand write.jffs2 0x800000 0x0 0x800
+
+NAND write: device 0 offset 0x0, size 0x800
+ 2048 bytes written: OK
+u-boot> loadb 0x800000 
+u-boot> imi
+
+## Checking Image at 00800000 ...
+   Legacy image found
+   Image Name:   U-Boot 2010.03-lsp-3.2.4-rc1-000
+   Image Type:   ARM Linux Firmware (uncompressed)
+   Data Size:    137868 Bytes = 134.6 KiB
+   Load Address: 00700000
+   Entry Point:  00000000
+   Verifying Checksum ... OK
+u-boot> nand write.jffs2 0x800000 0x10000 0x22000
+
+NAND write: device 0 offset 0x10000, size 0x22000
+ 139264 bytes written: OK
+u-boot> version
+
+U-Boot 2010.03-lsp-3.2.4-rc1-00010-g7c31b03 (May 16 2012 - 14:27:30)-SPEAr
+u-boot> nand erase 0x0 0x60000
+
+NAND erase: device 0 offset 0x0, size 0x60000
+Erasing at 0x0 --  33% complete.Erasing at 0x20000 --  66% complete.Erasing at 0x40000 -- 100% complete.
+OK
+u-boot> loadb 0x800000 
+u-boot> imi
+
+## Checking Image at 00800000 ...
+   Legacy image found
+   Image Name:   XLOADER
+   Image Type:   ARM Linux Firmware (uncompressed)
+   Data Size:    1788 Bytes = 1.7 KiB
+   Load Address: d2800b00
+   Entry Point:  d2800b00
+   Verifying Checksum ... OK
+u-boot> nand write.jffs2 0x800000 0x0 0x800
+
+NAND write: device 0 offset 0x0, size 0x800
+ 2048 bytes written: OK
+u-boot> nand write.jffs2 0x800000 0x4000 0x800
+
+NAND write: device 0 offset 0x4000, size 0x800
+ 2048 bytes written: OK
+u-boot> nand write.jffs2 0x800000 0x8000 0x800
+
+NAND write: device 0 offset 0x8000, size 0x800
+ 2048 bytes written: OK
+u-boot> nand write.jffs2 0x800000 0xC000 0x800
+
+NAND write: device 0 offset 0xc000, size 0x800
+ 2048 bytes written: OK
+u-boot> loadb 0 
+u-boot> imi
+
+## Checking Image at 00800000 ...
+   Legacy image found
+   Image Name:   U-Boot 2010.03-lsp-3.2.4-rc1-000
+   Image Type:   ARM Linux Firmware (uncompressed)
+   Data Size:    137868 Bytes = 134.6 KiB
+   Load Address: 00700000
+   Entry Point:  00000000
+   Verifying Checksum ... OK
+u-boot> nand write.jffs2 0x800000 0x10000 0x22000
+
+NAND write: device 0 offset 0x10000, size 0x22000
+ 139264 bytes written: OK
+u-boot> version
+
+U-Boot 2010.03-lsp-3.2.4-rc1-00010-g7c31b03 (May 16 2012 - 14:27:30)-SPEAr
+u-boot> nand erase 0x0 0x60000
+
+NAND erase: device 0 offset 0x0, size 0x60000
+Erasing at 0x0 --  33% complete.Erasing at 0x20000 --  66% complete.Erasing at 0x40000 -- 100% complete.
+OK
+u-boot> loa 
+u-boot> imi
+
+## Checking Image at 00800000 ...
+   Legacy image found
+   Image Name:   XLOADER
+   Image Type:   ARM Linux Firmware (uncompressed)
+   Data Size:    5370 Bytes = 5.2 KiB
+   Load Address: d2800b00
+   Entry Point:  d2800b00
+   Verifying Checksum ... OK
+u-boot> nand write.jffs2 0x800000 0x0 0x1800
+
+NAND write: device 0 offset 0x0, size 0x1800
+ 6144 bytes written: OK
+u-boot> nand write.jffs2 0x800000 0x4000 0x1800
+
+NAND write: device 0 offset 0x4000, size 0x1800
+ 6144 bytes written: OK
+u-boot> nand write.jffs2 0x800000 0x8000 0x1800
+
+NAND write: device 0 offset 0x8000, size 0x1800
+ 6144 bytes written: OK
+u-boot> nand write.jffs2 0x800000 0xC000 0x1800
+
+NAND write: device 0 offset 0xc000, size 0x1800
+ 6144 bytes written: OK
+u-boot> loadb 0x800000 
+u-boot> imi
+
+## Checking Image at 00800000 ...
+   Legacy image found
+   Image Name:   U-Boot 2010.03-lsp-3.2.4-rc1-000
+   Image Type:   ARM Linux Firmware (uncompressed)
+   Data Size:    137868 Bytes = 134.6 KiB
+   Load Address: 00700000
+   Entry Point:  00000000
+   Verifying Checksum ... OK
+u-boot> nand write.jffs2 0x800000 0x10000 0x22000
+
+NAND write: device 0 offset 0x10000, size 0x22000
+ 139264 bytes written: OK
+u-boot> loadb 0x800000
+## Ready for binary (kermit) download to 0x00800000 at 115200 bps...
+ 
+u-boot> imi
+
+## Checking Image at 00800000 ...
+   Legacy image found
+   Image Name:   Linux+initramfs+DTB
+   Image Type:   ARM Linux Kernel Image (uncompressed)
+   Data Size:    5381072 Bytes = 5.1 MiB
+   Load Address: 00008000
+   Entry Point:  00008000
+   Verifying Checksum ... OK
+u-boot> nand erase 0x80000 0x540000
+
+NAND erase: device 0 offset 0x80000, size 0x540000
+Erasing at 0x80000 --   2% complete.Erasing at 0xa0000 --   4% complete.Erasing at 0xc0000 --   7% complete.Erasing at 0xe0000 --   9% complete.Erasing at 0x100000 --  11% complete.Erasing at 0x120000 --  14% complete.Erasing at 0x140000 --  16% complete.Erasing at 0x160000 --  19% complete.Erasing at 0x180000 --  21% complete.Erasing at 0x1a0000 --  23% complete.Erasing at 0x1c0000 --  26% complete.Erasing at 0x1e0000 --  28% complete.Erasing at 0x200000 --  30% complete.Erasing at 0x220000 --  33% complete.Erasing at 0x240000 --  35% complete.Erasing at 0x260000 --  38% complete.Erasing at 0x280000 --  40% complete.Erasing at 0x2a0000 --  42% complete.Erasing at 0x2c0000 --  45% complete.Erasing at 0x2e0000 --  47% complete.Erasing at 0x300000 --  50% complete.Erasing at 0x320000 --  52% complete.Erasing at 0x340000 --  54% complete.Erasing at 0x360000 --  57% complete.Erasing at 0x380000 --  59% complete.Erasing at 0x3a0000 --  61% complete.Erasing at 0x3c0000 --  64% complete.Erasing at 0x3e0000 --  66% complete.Erasing at 0x400000 --  69% complete.Erasing at 0x420000 --  71% complete.Erasing at 0x440000 --  73% complete.Erasing at 0x460000 --  76% complete.Erasing at 0x480000 --  78% complete.Erasing at 0x4a0000 --  80% complete.Erasing at 0x4c0000 --  83% complete.Erasing at 0x4e0000 --  85% complete.Erasing at 0x500000 --  88% complete.Erasing at 0x520000 --  90% complete.Erasing at 0x540000 --  92% complete.Erasing at 0x560000 --  95% complete.Erasing at 0x580000 --  97% complete.Erasing at 0x5a0000 -- 100% complete.
+OK
+u-boot> nand write.jffs2 0x800000 0x80000 0x540000
+
+NAND write: device 0 offset 0x80000, size 0x540000
+ 5505024 bytes written: OK
+u-boot> setenv bootargs console=ttyAMA0,115200 mem=128M
+u-boot> nand read.jffs2 0x1600000 0x80000 0x540000
+
+NAND read: device 0 offset 0x80000, size 0x540000
+ 5505024 bytes read: OK
+u-boot> version
+
+U-Boot 2010.03-lsp-3.2.4-rc1-00010-g7c31b03 (May 16 2012 - 14:27:30)-SPEAr
+u-boot> setenv bootargs console=ttyAMA0,115200 mem=128M
+u-boot> nand read.jffs2 0x1600000 0x80000 0x540000
+
+NAND read: device 0 offset 0x80000, size 0x540000
+ 5505024 bytes read: OK
+u-boot> version
+
+U-Boot 2010.03-lsp-3.2.4-rc1-00010-g7c31b03 (May 16 2012 - 14:27:30)-SPEAr
+u-boot> setenv bootargs console=ttyAMA0,115200 mem=128M
+u-boot> nand read.jffs2 0x1600000 0x80000 0x540000
+
+NAND read: device 0 offset 0x80000, size 0x540000
+ 5505024 bytes read: OK
+u-boot> version
+
+U-Boot 2010.03-lsp-3.2.4-rc1-00010-g7c31b03 (May 16 2012 - 14:27:30)-SPEAr
+u-boot> md.l 0xFCA80000 1
+fca80000: 000c0201    ....
+u-boot> setenv bootargs console=ttyAMA0,115200 mem=128M
+u-boot> nand read.jffs2 0x1600000 0x80000 0x540000
+
+NAND read: device 0 offset 0x80000, size 0x540000
+ 5505024 bytes read: OK
+u-boot> version
+
+U-Boot 2010.03-lsp-3.2.4-rc1-00010-g7c31b03 (May 16 2012 - 14:27:30)-SPEAr
+u-boot> setenv bootargs console=ttyAMA0,115200 mem=128M
+u-boot> nand read.jffs2 0x1600000 0x80000 0x540000
+
+NAND read: device 0 offset 0x80000, size 0x540000
+NAND read from offset 80000 failed -74
+ 5505024 bytes read: ERROR
+u-boot> bootm 0x1600000
+## Booting kernel from Legacy Image at 01600000 ...
+   Image Name:   U-Boot SPEAr600
+   Image Type:   ARM U-Boot Firmware (uncompressed)
+   Data Size:    256712 Bytes = 250.7 KiB
+   Load Address: 00700000
+   Entry Point:  00700000
+Wrong Image Type for bootm command
+ERROR: can't get kernel image!
+u-boot> load 
+u-boot> imi
+
+## Checking Image at 00800000 ...
+   Legacy image found
+   Image Name:   Linux+initramfs+DTB
+   Image Type:   ARM Linux Kernel Image (uncompressed)
+   Data Size:    5381072 Bytes = 5.1 MiB
+   Load Address: 00008000
+   Entry Point:  00008000
+   Verifying Checksum ... OK
+u-boot> loadb 0x8000 
+u-boot> imi
+
+## Checking Image at 00800000 ...
+   Legacy image found
+   Image Name:   Linux+initramfs+DTB
+   Image Type:   ARM Linux Kernel Image (uncompressed)
+   Data Size:    6693208 Bytes = 6.4 MiB
+   Load Address: 00008000
+   Entry Point:  00008000
+   Verifying Checksum ... OK
+u-boot> setenv bootargs console=ttyAMA0,115200 mem=128M
+u-boot> nand erase 0x0 0x20000
+
+NAND erase: device 0 offset 0x0, size 0x20000
+Erasing at 0x0 -- 100% complete.
+OK
+u-boot> nand erase 0x0 0x200000
+
+NAND erase: device 0 offset 0x0, size 0x200000
+Erasing at 0x0 --   6% complete.Erasing at 0x20000 --  12% complete.Erasing at 0x40000 --  18% complete.Erasing at 0x60000 --  25% complete.Erasing at 0x80000 --  31% complete.Erasing at 0xa0000 --  37% complete.Erasing at 0xc0000 --  43% complete.Erasing at 0xe0000 --  50% complete.Erasing at 0x100000 --  56% complete.Erasing at 0x120000 --  62% complete.Erasing at 0x140000 --  68% complete.Erasing at 0x160000 --  75% complete.Erasing at 0x180000 --  81% complete.Erasing at 0x1a0000 --  87% complete.Erasing at 0x1c0000 --  93% complete.Erasing at 0x1e0000 -- 100% complete.
+OK
+u-boot> loadb 0x800000 
+u-boot> imi
+
+## Checking Image at 00800000 ...
+   Legacy image found
+   Image Name:   XLOADER
+   Image Type:   ARM Linux Kernel Image (uncompressed)
+   Data Size:    5372 Bytes = 5.2 KiB
+   Load Address: d2800b00
+   Entry Point:  d2800b00
+   Verifying Checksum ... OK
+u-boot> nand write.jffs2 0x800000 0x0 0x2000
+
+NAND write: device 0 offset 0x0, size 0x2000
+ 8192 bytes written: OK
+u-boot> loadb 
+u-boot> imi
+
+## Checking Image at 00800000 ...
+   Legacy image found
+   Image Name:   UBOOT
+   Image Type:   ARM Linux Kernel Image (uncompressed)
+   Data Size:    208852 Bytes = 204 KiB
+   Load Address: 00700000
+   Entry Point:  00700000
+   Verifying Checksum ... OK
+u-boot> nand write.jffs2 0x800000 0xE0000 0x34000
+
+NAND write: device 0 offset 0xe0000, size 0x34000
+ 212992 bytes written: OK
+u-boot> loadb 0x800000
+## Ready for binary (kermit) download to 0x00800000 at 115200 bps...
+ 
+u-boot> imi
+
+## Checking Image at 00800000 ...
+Unknown image format!
+u-boot> nand write.jffs2 0x800000 0x80000 0x800
+
+NAND write: device 0 offset 0x80000, size 0x800
+ 2048 bytes written: OK
+u-boot> loa 
+u-boot> imi
+
+## Checking Image at 00800000 ...
+   Legacy image found
+   Image Name:   Linux-2.6.19.2-dirty
+   Image Type:   ARM Linux Kernel Image (uncompressed)
+   Data Size:    1643424 Bytes = 1.6 MiB
+   Load Address: 00008000
+   Entry Point:  00008000
+   Verifying Checksum ... OK
+u-boot> nand write.jffs2 0x800000 0x1A0000 0x1A0000
+
+NAND write: device 0 offset 0x1a0000, size 0x1a0000
+ 1703936 bytes written: OK
+u-boot> loadb 0x8 
+u-boot> imi
+
+## Checking Image at 00800000 ...
+Unknown image format!
+u-boot> nand write.jffs2 0x800000 0x600000 0xAC0000
+
+NAND write: device 0 offset 0x600000, size 0xac0000
+ 11272192 bytes written: OK
+u-boot> version
+
+U-Boot 2010.03-lsp-3.2.4-rc1-00010-g7c31b03 (May 16 2012 - 14:27:30)-SPEAr
+u-boot> setenv serverip 192.168.11.121
+u-boot> setenv ipaddr 192.168.11.200
+u-boot> setenv bootargs console=ttyAMA0,115200 mem=128M
+u-boot> tftpboot 0x800000 uImage
+Unknown command 'tftpboot' - try 'help'
+u-boot> bootm 0x800000
+Wrong Image Format for bootm command
+ERROR: can't get kernel image!
+u-boot> version
+
+U-Boot 2010.03-lsp-3.2.4-rc1-00010-g7c31b03 (May 16 2012 - 14:27:30)-SPEAr
+u-boot>  
+u-boot> imi
+
+## Checking Image at 00800000 ...
+   Legacy image found
+   Image Name:   XLOADER
+   Image Type:   ARM Linux Kernel Image (uncompressed)
+   Data Size:    5372 Bytes = 5.2 KiB
+   Load Address: d2800b00
+   Entry Point:  d2800b00
+   Verifying Checksum ... OK
+u-boot> nand info
+
+Device 0: NAND 128MiB 3,3V 8-bit, sector size 128 KiB
+u-boot> nand erase 0x0  0x20000
+
+NAND erase: device 0 offset 0x0, size 0x20000
+Erasing at 0x0 -- 100% complete.
+OK
+u-boot> nand write.jffs2 0x800000 0x0 0x20000
+
+NAND write: device 0 offset 0x0, size 0x20000
+ 131072 bytes written: OK
+u-boot> loadb 0x800000
+## Ready for binary (kermit) download to 0x00800000 at 115200 bps...
+ 
+u-boot> imi
+
+## Checking Image at 00800000 ...
+Unknown image format!
+u-boot> nand info
+
+Device 0: NAND 128MiB 3,3V 8-bit, sector size 128 KiB
+u-boot> nand erase 0x80000  0x20000
+
+NAND erase: device 0 offset 0x80000, size 0x20000
+Erasing at 0x80000 -- 100% complete.
+OK
+u-boot> nand write.jffs2 0x800000 0x80000 0x20000
+
+NAND write: device 0 offset 0x80000, size 0x20000
+ 131072 bytes written: OK
+u-boot> loadb 0x800000 
+u-boot> imi
+
+## Checking Image at 00800000 ...
+   Legacy image found
+   Image Name:   UBOOT
+   Image Type:   ARM Linux Kernel Image (uncompressed)
+   Data Size:    208852 Bytes = 204 KiB
+   Load Address: 00700000
+   Entry Point:  00700000
+   Verifying Checksum ... OK
+u-boot> nand info
+
+Device 0: NAND 128MiB 3,3V 8-bit, sector size 128 KiB
+u-boot> nand erase 0xE0000  0x40000
+
+NAND erase: device 0 offset 0xe0000, size 0x40000
+Erasing at 0xe0000 --  50% complete.Erasing at 0x100000 -- 100% complete.
+OK
+u-boot> nand write.jffs2 0x800000 0xE0000 0x40000
+
+NAND write: device 0 offset 0xe0000, size 0x40000
+ 262144 bytes written: OK
+u-boot> loadb 0x80000 
+u-boot> imi
+
+## Checking Image at 00800000 ...
+   Legacy image found
+   Image Name:   Linux-2.6.19.2-dirty
+   Image Type:   ARM Linux Kernel Image (uncompressed)
+   Data Size:    1643424 Bytes = 1.6 MiB
+   Load Address: 00008000
+   Entry Point:  00008000
+   Verifying Checksum ... OK
+u-boot> nand info
+
+Device 0: NAND 128MiB 3,3V 8-bit, sector size 128 KiB
+u-boot> nand erase 0x1A0000  0x1a0000
+
+NAND erase: device 0 offset 0x1a0000, size 0x1a0000
+Erasing at 0x1a0000 --   7% complete.Erasing at 0x1c0000 --  15% complete.Erasing at 0x1e0000 --  23% complete.Erasing at 0x200000 --  30% complete.Erasing at 0x220000 --  38% complete.Erasing at 0x240000 --  46% complete.Erasing at 0x260000 --  53% complete.Erasing at 0x280000 --  61% complete.Erasing at 0x2a0000 --  69% complete.Erasing at 0x2c0000 --  76% complete.Erasing at 0x2e0000 --  84% complete.Erasing at 0x300000 --  92% complete.Erasing at 0x320000 -- 100% complete.
+OK
+u-boot> nand write.jffs2 0x800000 0x1A0000 0x1a0000
+
+NAND write: device 0 offset 0x1a0000, size 0x1a0000
+ 1703936 bytes written: OK
+u-boot> loadb 0x800000
+ 
+u-boot> imi
+
+## Checking Image at 00800000 ...
+Unknown image format!
+u-boot> nand info
+
+Device 0: NAND 128MiB 3,3V 8-bit, sector size 128 KiB
+u-boot> nand erase 0x600000  0xac0000
+
+NAND erase: device 0 offset 0x600000, size 0xac0000
+Erasing at 0x600000 --   1% complete.Erasing at 0x620000 --   2% complete.Erasing at 0x640000 --   3% complete.Erasing at 0x660000 --   4% complete.Erasing at 0x680000 --   5% complete.Erasing at 0x6a0000 --   6% complete.Erasing at 0x6c0000 --   8% complete.Erasing at 0x6e0000 --   9% complete.Erasing at 0x700000 --  10% complete.Erasing at 0x720000 --  11% complete.Erasing at 0x740000 --  12% complete.Erasing at 0x760000 --  13% complete.Erasing at 0x780000 --  15% complete.Erasing at 0x7a0000 --  16% complete.Erasing at 0x7c0000 --  17% complete.Erasing at 0x7e0000 --  18% complete.Erasing at 0x800000 --  19% complete.Erasing at 0x820000 --  20% complete.Erasing at 0x840000 --  22% complete.Erasing at 0x860000 --  23% complete.Erasing at 0x880000 --  24% complete.Erasing at 0x8a0000 --  25% complete.Erasing at 0x8c0000 --  26% complete.Erasing at 0x8e0000 --  27% complete.Erasing at 0x900000 --  29% complete.Erasing at 0x920000 --  30% complete.Erasing at 0x940000 --  31% complete.Erasing at 0x960000 --  32% complete.Erasing at 0x980000 --  33% complete.Erasing at 0x9a0000 --  34% complete.Erasing at 0x9c0000 --  36% complete.Erasing at 0x9e0000 --  37% complete.Erasing at 0xa00000 --  38% complete.Erasing at 0xa20000 --  39% complete.Erasing at 0xa40000 --  40% complete.Erasing at 0xa60000 --  41% complete.Erasing at 0xa80000 --  43% complete.Erasing at 0xaa0000 --  44% complete.Erasing at 0xac0000 --  45% complete.Erasing at 0xae0000 --  46% complete.Erasing at 0xb00000 --  47% complete.Erasing at 0xb20000 --  48% complete.Erasing at 0xb40000 --  50% complete.Erasing at 0xb60000 --  51% complete.Erasing at 0xb80000 --  52% complete.Erasing at 0xba0000 --  53% complete.Erasing at 0xbc0000 --  54% complete.Erasing at 0xbe0000 --  55% complete.Erasing at 0xc00000 --  56% complete.Erasing at 0xc20000 --  58% complete.Erasing at 0xc40000 --  59% complete.Erasing at 0xc60000 --  60% complete.Erasing at 0xc80000 --  61% complete.Erasing at 0xca0000 --  62% complete.Erasing at 0xcc0000 --  63% complete.Erasing at 0xce0000 --  65% complete.Erasing at 0xd00000 --  66% complete.Erasing at 0xd20000 --  67% complete.Erasing at 0xd40000 --  68% complete.Erasing at 0xd60000 --  69% complete.Erasing at 0xd80000 --  70% complete.Erasing at 0xda0000 --  72% complete.Erasing at 0xdc0000 --  73% complete.Erasing at 0xde0000 --  74% complete.Erasing at 0xe00000 --  75% complete.Erasing at 0xe20000 --  76% complete.Erasing at 0xe40000 --  77% complete.Erasing at 0xe60000 --  79% complete.Erasing at 0xe80000 --  80% complete.Erasing at 0xea0000 --  81% complete.Erasing at 0xec0000 --  82% complete.Erasing at 0xee0000 --  83% complete.Erasing at 0xf00000 --  84% complete.Erasing at 0xf20000 --  86% complete.Erasing at 0xf40000 --  87% complete.Erasing at 0xf60000 --  88% complete.Erasing at 0xf80000 --  89% complete.Erasing at 0xfa0000 --  90% complete.Erasing at 0xfc0000 --  91% complete.Erasing at 0xfe0000 --  93% complete.Erasing at 0x1000000 --  94% complete.Erasing at 0x1020000 --  95% complete.Erasing at 0x1040000 --  96% complete.Erasing at 0x1060000 --  97% complete.Erasing at 0x1080000 --  98% complete.Erasing at 0x10a0000 -- 100% complete.
+OK
+u-boot> nand write.jffs2 0x800000 0x600000 0xac0000
+
+NAND write: device 0 offset 0x600000, size 0xac0000
+ 11272192 bytes written: OK
+u-boot> 

@@ -1,0 +1,58 @@
+== USB Flashing Package Layout ==
+
+Following figure explains the usb flashing package layout.
+
+        USB Flashing Utility
+                |      
+                |
+                +---- Binaries/
+                |
+                +---- Setup/
+                |       |       
+                |       +-------- WinXP/
+                |       |
+                |       +-------- Win7/
+                |
+                +---- Configuration/
+                | 
+                +---- Tools/
+                |       |
+                |       |         
+                |       +--------- Win/
+                |       |
+                |       |
+                |       +--------- Linux/
+                |       |
+                |       |
+                |       +--------+ src/
+                |                |
+                |                +-------- usb_send/
+                |                |
+                |                |
+                |                +-------- ukermit/
+                |        
+                +---- Scripts/
+                |
+                +---- Doc/
+                |
+                +---- Contrib/
+
+
+   - Binaries/ contain the initial firmware binaries used to initialize
+     DDR and bring up ttyUSB interface.
+
+   - Setup/ contains driver and its inf files
+
+   - Configurations/ contains the configuration files for each device
+     for flashing images to their respective partitions
+
+   - Scripts/ contain test script demonstrating u-boot command executions
+
+   - Tools/ contain basic tools to send initial firmware to BootROM
+     through lib-usb and ukermit to send binary images over ttyUSB
+     interface.
+
+   - Doc/ contain the USB flashing utility usage help
+
+   - Contrib/ contain the rules file for "udev" system tool
+

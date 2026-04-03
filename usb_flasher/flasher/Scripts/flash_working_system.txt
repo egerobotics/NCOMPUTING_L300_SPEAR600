@@ -1,0 +1,6 @@
+connect -d SPEAr600
+flash -m nand -f ../../firmware/xloader_image.bin -a 0x0 -p /dev/ttyACM0
+flash -m nand -f ../../firmware/l300_fwd_mod.fwd -a 0x80000 -p /dev/ttyACM0
+flash -m nand -f ../../firmware/u-boot.img -a 0xE0000 -p /dev/ttyACM0
+flash -m nand -f ../../firmware/uImage -a 0x1A0000 -p /dev/ttyACM0
+flash -m nand -f ../../firmware/l300_initramfs_mod.gz -a 0x600000 -p /dev/ttyACM0

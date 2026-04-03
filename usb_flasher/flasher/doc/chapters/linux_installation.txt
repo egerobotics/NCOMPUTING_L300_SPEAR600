@@ -1,0 +1,160 @@
+== Installation on Linux Machine ==
+
+This section covers installation and configuration required at SPEAr and
+Linux Host PC level in order to use Flashing tool. This step is mandatory
+before start using Flashing utility.
+
+This section also deals with the compilation of the binaries for usb_send 
+and ukermit. 
+
+=== Components Required ===
+
+Following components are necessary to be installed on Host PC to
+use the Flashing utility. 
+
+   - TCL-TK version 8.5
+   - libusb0.1
+
+For Linux you can install tck/tk (Version 8.5) through yum (on Fedora) or 
+apt-get (on Ubuntu).
+
+The Flashing tool uses TCL/TK to present the GUI interface for flashing.
+
+=== Installation Procedure ===
+
+This section describes the installation procedure of flashing utility.
+
+==== Installing TCL/TK on Linux ==== 
+
+One can use following command on Fedora to install tcl/tk
+	
+	# yum install tcltk8.5
+
+==== Installing libusb on Linux ====
+
+To install libusb on Fedora following command can be used
+
+	# yum install libusb
+
+This completes the required install of components for flashing utility. 
+Flashing utility would use this interface to flash the binaries. 
+
+=== Compilation of usb_send and ukermit ===
+
+usb_send is used to connect the board with host PC and ukermit is used to
+load the binary file. Their compiled binaries are already included in
+'Tools/Linux/'.
+
+User can make changes in usb_send and ukermit utilities to suit there
+needs. To recompile the binaries following components are required.
+
+   * gcc compiler
+   * libusb0.1 development libraries
+
+To compile the usb_send,
+
+Go to directory: 'flasher/Tools/src/usbsend/'
+
+	# make 
+
+Move the binary generated to the directory: flasher/Tools/Linux/
+
+To compile the ukermit,
+
+Go to directory: flasher/Tools/src/ukermit/
+
+	# make 
+
+Move the binary generated to the directory: flasher/Tools/Linux/
+
+[Note]
+flasher/Tools/Linux/ is the default location from where flasher picks up
+the usb_send and ukermit tools binaries.
+
+=== Run Flashing utility as non root user ===
+
+Flashing utility have to access USB bus in order to communicate with
+SPEAr boards.
+
+By default, in a Linux system only user "root" has the required privileges
+to access to system devices.
+Using "root" in the host PC for common tasks like upgrading board
+firmware is highly discouraged, since any command wrongly typed
+can lead to undesired changes in system configuration and, in worst case,
+determine system instability.
+
+This chapter explains how to use the Linux system tool "udev" for
+configuring a Linux system to dynamically assign the proper permission
+to the USB devices associated to SPEAr.
+This is enough to allows unprivileged users (non "root") to use Flashing utility.
+
+Flashing utility needs to use two classes of USB devices:
+
+	- SPEAr boot ROM USB device
+	- USB serial emulation device
+
+The unprivileged user intended to run Flashing utility have to be
+allowed to access to both classes.
+
+To enable access to SPEAr boot ROM USB device, Flashing utility
+provides an "udev" rules script in folder "contrib".
+The script have to be copied in the "udev" configuration folder, then
+"udev" have to be instructed to reload the configuration.
+As "root", type:
+
+	# cp contrib/udev.rules /etc/udev/rules.d/95-spear.rules
+	# udevadm control --reload-rules
+
+Such script assigns to group "plugdev" the USB device of SPEAr.
+In order to use Flashing utility, user have to be part of the group "plugdev".
+
+First of all, group "plugdev" must be created if not already present.
+Type
+
+	# getent group | grep ^plugdev:
+	plugdev:x:501:user1
+
+to determine if the group is already present. Expected output would be similar to
+the text reported above.
+In case of no output, the group does not exist and have to be created with command
+
+        # groupadd plugdev
+
+Then, unprivileged user have to be added to group "plugdev".
+As example, user "stm" is added to "plugdev" with following command.
+
+	# usermod -a -G plugdev stm
+
+To verify that user "stm" is correctly added to the group, type
+
+	# id stm
+	uid=500(stm) gid=500(stm) groups=500(stm),501(plugdev)
+
+The output reports all the groups the user belongs. "plugdev" must be
+in the list, as in the example.
+
+At last, user access have to be granted also for USB serial emulation devices.
+"udev" rules for this purpose are normally part of Linux distribution.
+In Fedora Linux, every serial device is assigned to group "dialout".
+You can check permission of default serial port
+
+	# ls -l /dev/ttyS*
+	crw-rw----. 1 root dialout 4, 64 May 17 13:48 /dev/ttyS0
+
+By adding unprivileged user to group "dialout" (in Fedora), the user
+would be able to access to every USB serial emulation device. In the
+example below it's used again user "stm"
+
+	# usermod -a -G dialout stm
+
+The modification to user group would be effective after next login
+of the user.
+If you are logged in as unprivileged user and then switched to "root"
+to type the commands above, then logout and login again to activate
+the modifications.
+No need to reboot your Linux box.
+
+By allowing unpriviledged user to access to serial devices, the
+user will be also able to run serial communication programs, e.g.
+"minicom", without need for "root" privileges.
+

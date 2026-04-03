@@ -1,0 +1,93 @@
+== Flashing Utility Architecture ==
+
+Flashing Utility Architecture uses different components at different
+stages to accomplish flashing operation. 
+
+In the very first stage the USB boot mode support available in SPEAr
+platform BootROM is used. In this mode the BootROM enumerate itself as a
+generic USB device capable of receiving and executing any binary
+transferred by USB host. 
+
+As soon as a binary/firmware is transferred from USB host, BootROM
+executes it and then the control can be taken over by the firmware
+itself to present any desired interface or to perform any task.
+
+In the USB flashing utility this firmware is a DDR driver (xloader) and
+customized u-boot to enumerate SPEAr device as a serial device (tty over
+USB) which can then be used from host to send any u-boot command.
+
+This interace is then used to execute u-boot commands to perform
+flashing operation. The Host side flashing GUI hides this complexity by
+offering a simple user interface for flashing operations.
+
+=== BootROM (USB boot) ===
+
+Refer BootROM manual of the respective SPEAr device.
+
+=== Flashing Utility Firmware (Xloader and U-Boot) ===
+
+As mentioned before, following are the steps involved in setting up the
+flashing interface on usb host.
+
+    * Configure boot-strap for usb boot and power-on SPEAr
+    * Connect USB host which would see a vendor specific usb device
+    * SPEAr bootrom which exposes this interface receives Xloader from
+      usb host and execute it to initialize DDR
+    * After Xloader, u-boot is sent which is again executed by BootROM
+    * u-boot takes over usb interface re-enumerating as usb-tty interface
+
+These steps leave U-Boot running on the SPEAr device. Now, U-Boot
+commands can be run on a serial interface exposed to the Host machine to
+support erasing and flashing of NAND and Serial NOR device. The U-boot
+source code is same available with SPEAr LSP. This special U-Boot boot
+loader is build to support TTY over USB. 
+
+To generate this firmware image, U-boot build has to be done in the
+following way:
+
+	$ make spearXXX_usbtty_config
+
+Similarly, DDR2 driver image can be generated from Xloader source using
+the following command:
+
+	$ make spearXXX_usbtty_config
+
+=== tty over USB ===
+
+The USB serial device driver provides serial port emulation on Windows
+operating systems by implementing a serial link emulation protocol on
+USB. The driver exposes a Win32-compatible COM port and in addition
+provides some unique features such as a Plug-Play compliant device
+instance enumeration method. This avoids confusion about COM port
+numbers and improves usability. The CDC ACM driver on Windows exposes
+the USB device as a virtual COM port to the operation system
+
+The USB serial driver enables sending both data and command either
+through ACM or through serial emulation. 
+
+tty over USB Features:
+
+1. Exposes a virtual COM port that is compatible with the Win32
+serial port 
+2. COM port can be used by standard Windows programs such as
+HyperTerminal 
+3. COM port name gets assigned automatically 
+4. Supports add and remove notifications and a Plug & Play
+compliant port enumeration and identification method that is not based
+on COM port names 
+5. Optional static COM port behavior to support legacy applications. The
+application can keep the COM port opened while the device is removed and
+continue the communication if the device is reconnected. 
+
+=== tty over USB Usage in Flashing Utilities ===
+
+The exposed TTY interface (TTY over USB) can be used on the Host side as
+a U-Boot console to send commands and receive response. This enables to
+run all the U-Boot commands over the USBTTY link. Also, the same link is
+used to download Binary Images at virtually the USB speed through
+standard Kermit protocol.
+
+For example, erasing a partition in Serial NOR chip can be easily done
+by sending the command 
+
+	erase 1:5-10

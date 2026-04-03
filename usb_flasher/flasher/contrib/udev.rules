@@ -1,0 +1,12 @@
+# To be installed as /etc/udev/rules.d/95-spear.rules
+#
+# Use "udevadm control --reload-rules" to refresh udev rules.
+
+# 0483:3801 SPEAr3xx
+# 0483:3802 SPEAr13xx
+# 0483:7261 SPEAr6xx
+
+ACTION=="add|change", SUBSYSTEMS=="usb", ATTRS{idVendor}=="0483", ATTRS{idProduct}=="3801", MODE="0664", GROUP="dialout"
+ACTION=="add|change", SUBSYSTEMS=="usb", ATTRS{idVendor}=="0483", ATTRS{idProduct}=="3802", MODE="0664", GROUP="dialout"
+ACTION=="add|change", SUBSYSTEMS=="usb", ATTRS{idVendor}=="0483", ATTRS{idProduct}=="7261", MODE="0664", GROUP="dialout"
+

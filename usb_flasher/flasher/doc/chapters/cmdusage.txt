@@ -1,0 +1,219 @@
+== Command Interface Usage ==
+
+Command Interface can be used to upgrade and erase the flashes (NOR/ NAND) on 
+board. It can also used for automating the flashing procedure. Command 
+Interface is supported on the Windows (DOS) as well as on Linux Host Machine.
+
+Command Interface (flasher.tcl) can be invoked in the following modes: 
+
+- Interactive Mode
+ 
+	# tclsh flasher.tcl -i
+
+- Script/File Mode (flasher
+
+	# tclsh flasher.tcl -f script.txt
+
+- GUI Mode
+
+	# tclsh flasher.tcl 
+	or
+	# wish flasher-gui.tcl
+
+NOTE: Install cmdline package before using the command interface. With
+Activetcl, it is already installed on Windows machine. Install with yum or
+apt-get on linux platform 
+
+NOTE: Ensure that the executable is installed with a name +tclsh+ eg.
+the binary name is +tclsh85+ for tcl-8.5 installation. In such case,
+create a soft link with the link name as tclsh.
+
+=== Interactive Mode ===
+
+Interactive mode provides following set of basic command for the flashing 
+procedure:
+    
+    - [c]onnect : connects with the SPEAr device
+    - [s]end : to load file to the SPEAr device
+    - [f]lash : to flash the nand/nor memory
+    - [u]cmd : runs the basic U-boot command
+    - c[o]nfig : config reads the configuration file
+    - e[x]it: exits the interactive mode
+    - [h]elp: prints help for interactive mode
+    - sa[v]eenv: save environment variable in either nand or nor memory
+    
+IMPORTANT: Apart from this commands , user can run U-boot commands
+directly on the console.So if the interface founds any such command
+which is not from the above list, it runs the command on the U-Boot.
+
+==== connect command ====
+
+connect command runs the connect.tcl script. It sends the initial binaries for
+ddr driver and customized u-boot.   
+
+connect command takes argument for the device to be connected. 
+
+Short and Long argument option for the device can be -d and --device
+respectively.
+
+	# flasher -i
+	flasher> connect --device SPEAr900
+	or
+	flasher> c -d 900
+
+Following SPEAr SOC devices can be connected:
+
+   - SPEAr300
+   - SPEAr310
+   - SPEAr320
+   - SPEAr600
+   - SPEAr900
+   - SPEAr1300
+   - SPEAr1310_reva
+   - SPEAr1310
+   - SPEAr1340 
+
+Argument can be SPEArxxx or xxx, in case of xxx argument it concatenates
+the string "SPEAr" with xxx.Here xxx can be
+300/310/320/600/900/1300/1310_reva/1310/1340
+
+.connect command
+image::images/cmdusage1.png[]
+
+==== send command ====
+
+Once the device is connected, it gives the u-boot environment which is
+used to perform further flashing procedure.
+
+send command is used to load the image file in the memory.send command
+runs the send.tcl script which in turn invokes the ucmd.tcl script for
+u-boot command and ukermit binary for file transfer.It ensures the valid
+file path.
+
+It does following tasks in order:
+
+   - runs loadb command on the u-boot 
+    (loadb: load binary file over serial line (kermit mode) )
+   - executes the ukermit binary, which transmits the image file
+   - runs imi command on the u-boot
+    (imi: prints the image information loaded in the memory) 
+
+send command load the image file at the address 0x800000 by default.It takes the
+single argument for the file path. Argument for port and the load address is 
+optional.
+
+	flasher> send --file ../lsp/spear300_xlaoder.img
+	or
+	flasher> s -f ./lsp/spear3xx_uImage.img -a 0x130000 -p COM5
+
+.send command
+image::images/cmdusage2.png[]
+
+==== flash command ====
+
+flash command is used to flash the images at any address in the nor and nand 
+memory. It is based on the script flash.tcl which in turn depend on the send.tcl
+script for loading the image into the memory and ucmd.tcl script to run the 
+u-boot command.
+
+It does following task in order:
+
+   - load the image in the memory at address 0x800000
+   - calculate the filesize and align it with the sector size of the nand or nor
+     memory
+   - erase the nor or nand memory from the base address till the aligned
+     size of file
+   - copy the image file from the memory to the nand or nor memory 
+
+NOTE: The sector size for Nor memory is assumed to be 0x10000. The
+sector size for nand memory will be found by running nand info command. 
+
+flash command takes following three argument:
+
+   - -f / --file    : file path to be flashed
+   - -a / --address : base address of nor or nand memory at which image
+     will be flashed
+   - -m / --memory  : nor / nand memory
+
+Argument for the port is optional.
+
+	flasher> flash --file ../lsp/spear300_xlaoder.img --address 0xe6000000 --memory nor
+	or
+	flasher> f -f ./lsp/spear3xx_uImage.img -a 0xe6000000 -p COM5 -m nor
+
+.flash command
+image::images/cmdusage3.png[]
+
+==== ucmd command ====
+
+ucmd command is used to run the U-Boot command.It is  uses the ucmd.tcl script. 
+
+It takes the command to be run as argument. Argument for the port and the expect
+string is optional. In default case port is found by listing all the COM
+(on Windows) or /dev/ttyACM (on Linux) ports on host machine and selects
+last port created from the list. Expect string or end by default is "u-boot>".
+
+U-Boot commands can be run direcly on the console.Hence following two 
+example commands produces same result.
+
+	flasher> ucmd -c print 
+	or
+	flasher> print
+
+.ucmd command
+image::images/cmdusage4.png[]
+
+==== config command ====
+
+config command is used to read the configuration file of the device. It takes
+the SPEAr SOC device as argument. 
+ 
+	flasher> config SPEAr900
+
+.config command
+image::images/cmdusage5.png[]
+
+==== exit command ====
+
+It exits the interactive mode of the flasher.
+
+==== help command ====
+
+It prints the help for the interactive mode.
+
+.help command
+image::images/cmdusage6.png[]
+
+==== saveenv command ====
+
+It is used to save the environment variables into either nand or nor memory.
+
+saveenv command takes following two argument:
+
+   - flash(nor)/nand memory
+   - address at which environment variables are stored 
+
+	flasher> saveenv flash 0xe6040000 
+
+=== Script Mode ===
+
+Set of commands used in the interactive mode can be saved in text file.
+Flasher in script mode can be invoked on the command line which runs all
+the commands saved in previously stored in the text file.
+
+One such example of script (text file) is shown below. First line in
+text connects with the device. Next three commands will flash the
+Xloader, u-Boot and Linux image in the nor memory at different
+addresses. Fifth command is not from the set of command of interface,
+hence it runs direcly on the U-Boot.
+
+.Example of Script (text file)
+=====================================
+  1 connect --device SPEAr900
+  2 flash --file ../../lsp/spear13xx_uImage.img --address 0xe6050000 --memory nor
+  3 flash --file ../../lsp/spear900_xloader.img --address 0xe6000000 --memory nor
+  4 flash --file ../../lsp/spear900_u-boot.img --address 0xe6010000 --memory nor
+  5 version
+=======================================
+
+IMPORTANT: Script mode can be used to automate the flashing procedure.

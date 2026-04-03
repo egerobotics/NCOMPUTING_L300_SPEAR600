@@ -1,0 +1,9 @@
+help
+print
+version
+coninfo
+setenv bootdelay 1
+setenv ethaddr 55:66:77:88:99:00
+setenv variable1 100
+setenv variable2 200
+saveenv

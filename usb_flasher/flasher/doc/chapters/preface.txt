@@ -1,0 +1,65 @@
+== About this manual ==
+
+This manual intends to describe all required details of SPEAr flasher
+from installation proceedure to features and its usage.
+
+It also highlights some aspect of source so that people with interest in
+modifying the utility for their own purpose could be helpful.
+
+== Terms Used ==
+
+API::
+	Application programming interface
+ARM::
+	Advanced RISC machine
+BSP::
+	Board support package
+DDR::
+	Double data rate (RAM)
+DHCP::
+	Dynamic host configuration protocol
+FAT::
+	File allocation table
+FTP::
+	File transfer protocol
+GCC::
+	GNU compiler collection
+GPL::
+	General public license (GNU)
+IDE::
+	Integrated development environment
+IP::
+	Internet protocol
+LAN::
+	Local area network
+LGPL::
+	Lesser GPL
+LSP::
+	Linux support package
+MAC::
+	Media access control
+MTD::
+	Memory technology device
+NFS::
+	Network file system
+OS::
+	Operating system
+RAM::
+	Random access memory
+RPM::
+	RPM package manager
+RTC::
+	Real time clock
+SDK::
+	Software development kit
+SRAM::
+	Static RAM
+TFTP::
+	Trivial file transfer protocol
+UART::
+	Universal asynchronous receiver transmitter
+USB::
+	Universal serial bus
+ST Site::
+	http://www.stlinux.com/drupal/csd
+

@@ -1,0 +1,23 @@
+= SPEAr Flashing Utility (flasher) =
+Pradeep Santdasani <pradeep.santdasani@st.com>
+v2.4, May 2012
+
+include::chapters/preface.txt[]
+
+include::chapters/intro.txt[]
+
+include::chapters/windows_installation.txt[]
+
+include::chapters/linux_installation.txt[]
+
+include::chapters/guiusage.txt[]
+
+include::chapters/cmdusage.txt[]
+
+include::chapters/config.txt[]
+
+include::chapters/architecture.txt[]
+
+include::chapters/layout.txt[]
+
+include::chapters/appendix.txt[]

@@ -1,0 +1,159 @@
+== Installation on Windows Machine ==
+
+This section covers installation and configuration required at SPEAr and
+Host PC level in order to use Flashing tool. This step is mandatory
+before start using Flashing utility.
+
+=== Components Required ===
+
+Following components are necessary to be installed on Host Windows PC to
+use the Flashing utility. 
+
+   - TCL-TK version 8.5
+   - libusb-0.1
+   - usbserial driver
+
+These are the pre-requisite for flashing utility. For windows, the
+libusb driver and usbserial driver are already present with the tool.
+TCL-TK has to be downloaded and installed from the following path
+http://www.activestate.com/activetcl/
+
+The Flashing tool uses TCL/TK to present the GUI interface for flashing.
+The libusb and usbserial drivers are used in different stages to provide
+the communication medium with the SPEAr board. This would be described
+in later sections.
+
+=== Installation Procedure ===
+
+This section describes installation proceedure of flashing utility.
+
+==== Installing TCL/TK on Windows ====
+
+It is required to install the TCLTK support from the mentioned link
+before using the flashing tool. Please go to following web link for more
+details http://www.activestate.com/activetcl/
+
+
+==== Board Configuration ====
+
+After installation, the SPEAr board must be connected to Windows Host
+machine through USB cable. SPEAr board must be configured in USB boot
+mode and then powered on.
+
+To enable USB mode User should select proper dip switch configuration on
+the board.
+
+include::board_pin.txt[]
+
+==== Board Power-ON ====
+
+After making the above switch settings, power ON the board. Now the
+board will boot in the USB-Boot mode. In this mode SPEAr acts as the USB
+device which can receive bulk data on USB channel. Drivers for this
+device need to be installed before using this device. The driver for
+this device is available with the package and can be located in setup/
+folder.
+
+==== Installing lib-usb driver ====
+
+Lib-USB driver is used to send initial DDR and firmware binary to the
+SPEAr. This set of firmware is executed by the BOOTROM code. These
+binaries initialize DDR and provide suitable interface (usbtty in this
+case) so that further activities of flashing can be carried. As soon as
+the board is powered on and the USB cable is connected to Windows Host
+PC, the Windows Host PC would prompt for a found device message and will
+ask for a suitable driver.
+
+.Found New Hardware
+image::images/found-new-hw.png[]
+
+Unpack Setup/Win7/zadig_v1.1.1.140.7z and execute the zadig.exe. Choose
+the SPEAr device and in the backend libusb0.
+Click ‘Install Driver’ to install the lib-usb driver.
+
+.Install libusb driver
+image::images/zadig.png[]
+
+This would install the lib-usb driver for corresponding SPEAr device and
+windows device manager would show following entry.
+
+.libusb driver installed
+image::images/libusb.png[]
+
+Next step is to send the flashing firmware to SPEAr device and install
+usb-serial driver. The usbtty interface exported by this serial driver
+is used by the flasher to perform flashing operations
+
+==== Installing usbserial driver ====
+
+After lib-usb in the above mentioned step is installed, USB flashing
+utility can be used to connect to the SPEAr board. During the connect
+operation Flashing tool sends the DDR driver and firmware (using
+lib-usb) interface. These binaries are present in binaries/ folder of
+the package.
+
+Follow these steps to initiate this connection
+
+Run the flasher-gui.tcl file contained in the Flashing Utility folder. A
+new window would appear on screen
+
+.SPEAr Flashing Utility
+image::images/spear-utils.png[]
+
+Make sure that the board is powered and connected to the Windows
+machine. Click on the connect button. This would transmit the initial
+binaries to the SPEAr which would be executed by BootROM code. On
+execution this firmware would disconnect from usb and would try to
+enumerate as usb serial device.
+
+.Install usb-serial driver
+image::images/spear-soc.png[]
+
+Windows by itself would not be able to install the driver. Choose manual
+installation.
+
+When asked for the driver files browse through Setup/Win7 and choose
+spear_comport.inf. Proceed and complete the installation. Windows would
+now show a new com port entry in the device manager
+
+.Enumerated serial port
+image::images/spear-com.png[]
+
+This completes the required install of drivers for flashing utility. One
+can use this com port just like any other serial port. Flashing utility
+would use this interface to flash the binaries. Please proceed to next
+sections for details on flashing.
+
+=== Compilation of usb_send and ukermit ===
+ 
+usb_send is used to connect the board with host PC and ukermit is used to
+load the binary file. Their compiled binaries are already included in
+'Tools/Windows/'.
+
+User can make changes in usb_send and ukermit utilities to suit there
+needs. To recompile the binaries following components are required.
+ 
+    * gcc compiler
+    * libusb development library which is already present in
+      'Tools/src/usb_send/lib/Win/'
+
+ 
+To compile the usb_send,
+ 
+Go to directory: flasher/Tools/src/usbsend/
+ 
+        # make WINDOWS=1
+
+Move usbsend.exe to directory: flasher/Tools/Win/
+
+To compile the ukermit,
+
+Go to directory: flasher/Tools/src/ukermit/
+ 
+        # make WINDOWS=1
+         
+Move ukermit.exe to directory: flasher/Tools/Win/
+
+NOTE: flasher/Tools/Win/ is the default location from where flasher
+picks up the usb_send and ukermit tools binaries.
+

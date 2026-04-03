@@ -1,0 +1,605 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>SPEAr Flashing Utility (flasher)</title><link rel="stylesheet" type="text/css" href="docbook-xsl.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.76.1" /></head><body><div xml:lang="en" class="book" title="SPEAr Flashing Utility (flasher)" lang="en"><div class="titlepage"><div><div><h1 class="title"><a id="id487887"></a>SPEAr Flashing Utility (flasher)</h1></div><div><div class="author"><h3 class="author"><span class="firstname">Pradeep</span> <span class="surname">Santdasani</span></h3><code class="email">&lt;<a class="email" href="mailto:pradeep.santdasani@st.com">pradeep.santdasani@st.com</a>&gt;</code></div></div><div><div class="revhistory"><table border="1" width="100%" summary="Revision history"><tr><th align="left" valign="top" colspan="3"><strong>Revision History</strong></th></tr><tr><td align="left">Revision 2.4</td><td align="left">May 2012</td><td align="left">PS</td></tr></table></div></div></div><hr /></div><div class="toc"><p><strong>Table of Contents</strong></p><dl><dt><span class="chapter"><a href="#_about_this_manual">1. About this manual</a></span></dt><dt><span class="chapter"><a href="#_terms_used">2. Terms Used</a></span></dt><dt><span class="chapter"><a href="#_overview">3. Overview</a></span></dt><dd><dl><dt><span class="section"><a href="#_key_features">3.1. Key Features</a></span></dt><dt><span class="section"><a href="#_features_in_v_2_4">3.2. Features in v-2.4</a></span></dt><dt><span class="section"><a href="#_features_in_v_2_3">3.3. Features in v-2.3</a></span></dt><dt><span class="section"><a href="#_features_in_v_2_2">3.4. Features in v-2.2</a></span></dt><dt><span class="section"><a href="#_features_in_v_2_1">3.5. Features in v-2.1</a></span></dt></dl></dd><dt><span class="chapter"><a href="#_installation_on_windows_machine">4. Installation on Windows Machine</a></span></dt><dd><dl><dt><span class="section"><a href="#_components_required">4.1. Components Required</a></span></dt><dt><span class="section"><a href="#_installation_procedure">4.2. Installation Procedure</a></span></dt><dt><span class="section"><a href="#_compilation_of_usb_send_and_ukermit">4.3. Compilation of usb_send and ukermit</a></span></dt></dl></dd><dt><span class="chapter"><a href="#_installation_on_linux_machine">5. Installation on Linux Machine</a></span></dt><dd><dl><dt><span class="section"><a href="#_components_required_2">5.1. Components Required</a></span></dt><dt><span class="section"><a href="#_installation_procedure_2">5.2. Installation Procedure</a></span></dt><dt><span class="section"><a href="#_compilation_of_usb_send_and_ukermit_2">5.3. Compilation of usb_send and ukermit</a></span></dt><dt><span class="section"><a href="#_run_flashing_utility_as_non_root_user">5.4. Run Flashing utility as non root user</a></span></dt></dl></dd><dt><span class="chapter"><a href="#_gui_usage">6. GUI Usage</a></span></dt><dd><dl><dt><span class="section"><a href="#_selection_of_soc">6.1. Selection of SOC</a></span></dt><dt><span class="section"><a href="#_connecting_to_the_device">6.2. Connecting to the Device</a></span></dt><dt><span class="section"><a href="#_flashing_utility_configuration">6.3. Flashing utility Configuration</a></span></dt><dt><span class="section"><a href="#_erasing_partitions">6.4. Erasing Partitions</a></span></dt><dt><span class="section"><a href="#_programming_partitions">6.5. Programming Partitions</a></span></dt><dt><span class="section"><a href="#_executing_u_boot_commands_script">6.6. Executing U-boot Commands Script</a></span></dt></dl></dd><dt><span class="chapter"><a href="#_command_interface_usage">7. Command Interface Usage</a></span></dt><dd><dl><dt><span class="section"><a href="#_interactive_mode">7.1. Interactive Mode</a></span></dt><dt><span class="section"><a href="#_script_mode">7.2. Script Mode</a></span></dt></dl></dd><dt><span class="chapter"><a href="#_configuration">8. Configuration</a></span></dt><dt><span class="chapter"><a href="#_flashing_utility_architecture">9. Flashing Utility Architecture</a></span></dt><dd><dl><dt><span class="section"><a href="#_bootrom_usb_boot">9.1. BootROM (USB boot)</a></span></dt><dt><span class="section"><a href="#_flashing_utility_firmware_xloader_and_u_boot">9.2. Flashing Utility Firmware (Xloader and U-Boot)</a></span></dt><dt><span class="section"><a href="#_tty_over_usb">9.3. tty over USB</a></span></dt><dt><span class="section"><a href="#_tty_over_usb_usage_in_flashing_utilities">9.4. tty over USB Usage in Flashing Utilities</a></span></dt></dl></dd><dt><span class="chapter"><a href="#_usb_flashing_package_layout">10. USB Flashing Package Layout</a></span></dt><dt><span class="chapter"><a href="#_appendix">11. Appendix</a></span></dt><dd><dl><dt><span class="section"><a href="#_known_issues">11.1. Known Issues</a></span></dt><dt><span class="section"><a href="#_derived_features">11.2. Derived Features</a></span></dt></dl></dd></dl></div><div class="list-of-figures"><p><strong>List of Figures</strong></p><dl><dt>4.1. <a href="#id533341">Found New Hardware</a></dt><dt>4.2. <a href="#id533369">Install libusb driver</a></dt><dt>4.3. <a href="#id533396">libusb driver installed</a></dt><dt>4.4. <a href="#id533449">SPEAr Flashing Utility</a></dt><dt>4.5. <a href="#id533479">Install usb-serial driver</a></dt><dt>4.6. <a href="#id533512">Enumerated serial port</a></dt><dt>6.1. <a href="#id534106">SPEAr Flashing Utility</a></dt><dt>6.2. <a href="#id534151">Configure partition layout</a></dt><dt>6.3. <a href="#id534202">Flash erase</a></dt><dt>6.4. <a href="#id534238">Flash Program</a></dt><dt>6.5. <a href="#id534280">Serial Port Interface</a></dt><dt>6.6. <a href="#id534339">Run U-boot Command</a></dt><dt>7.1. <a href="#id534626">connect command</a></dt><dt>7.2. <a href="#id534712">send command</a></dt><dt>7.3. <a href="#id534833">flash command</a></dt><dt>7.4. <a href="#id534887">ucmd command</a></dt><dt>7.5. <a href="#id534930">config command</a></dt><dt>7.6. <a href="#id534976">help command</a></dt><dt>8.1. <a href="#id535124">Configure partition layout</a></dt></dl></div><div class="list-of-tables"><p><strong>List of Tables</strong></p><dl><dt>4.1. <a href="#id533120">Boot Pin Selection</a></dt></dl></div><div class="list-of-examples"><p><strong>List of Examples</strong></p><dl><dt>7.1. <a href="#id535062">Example of Script (text file)</a></dt></dl></div><div class="chapter" title="Chapter 1. About this manual"><div class="titlepage"><div><div><h2 class="title"><a id="_about_this_manual"></a>Chapter 1. About this manual</h2></div></div></div><p>This manual intends to describe all required details of SPEAr flasher
+from installation proceedure to features and its usage.</p><p>It also highlights some aspect of source so that people with interest in
+modifying the utility for their own purpose could be helpful.</p></div><div class="chapter" title="Chapter 2. Terms Used"><div class="titlepage"><div><div><h2 class="title"><a id="_terms_used"></a>Chapter 2. Terms Used</h2></div></div></div><div class="variablelist"><dl><dt><span class="term">
+API
+</span></dt><dd>
+        Application programming interface
+</dd><dt><span class="term">
+ARM
+</span></dt><dd>
+        Advanced RISC machine
+</dd><dt><span class="term">
+BSP
+</span></dt><dd>
+        Board support package
+</dd><dt><span class="term">
+DDR
+</span></dt><dd>
+        Double data rate (RAM)
+</dd><dt><span class="term">
+DHCP
+</span></dt><dd>
+        Dynamic host configuration protocol
+</dd><dt><span class="term">
+FAT
+</span></dt><dd>
+        File allocation table
+</dd><dt><span class="term">
+FTP
+</span></dt><dd>
+        File transfer protocol
+</dd><dt><span class="term">
+GCC
+</span></dt><dd>
+        GNU compiler collection
+</dd><dt><span class="term">
+GPL
+</span></dt><dd>
+        General public license (GNU)
+</dd><dt><span class="term">
+IDE
+</span></dt><dd>
+        Integrated development environment
+</dd><dt><span class="term">
+IP
+</span></dt><dd>
+        Internet protocol
+</dd><dt><span class="term">
+LAN
+</span></dt><dd>
+        Local area network
+</dd><dt><span class="term">
+LGPL
+</span></dt><dd>
+        Lesser GPL
+</dd><dt><span class="term">
+LSP
+</span></dt><dd>
+        Linux support package
+</dd><dt><span class="term">
+MAC
+</span></dt><dd>
+        Media access control
+</dd><dt><span class="term">
+MTD
+</span></dt><dd>
+        Memory technology device
+</dd><dt><span class="term">
+NFS
+</span></dt><dd>
+        Network file system
+</dd><dt><span class="term">
+OS
+</span></dt><dd>
+        Operating system
+</dd><dt><span class="term">
+RAM
+</span></dt><dd>
+        Random access memory
+</dd><dt><span class="term">
+RPM
+</span></dt><dd>
+        RPM package manager
+</dd><dt><span class="term">
+RTC
+</span></dt><dd>
+        Real time clock
+</dd><dt><span class="term">
+SDK
+</span></dt><dd>
+        Software development kit
+</dd><dt><span class="term">
+SRAM
+</span></dt><dd>
+        Static RAM
+</dd><dt><span class="term">
+TFTP
+</span></dt><dd>
+        Trivial file transfer protocol
+</dd><dt><span class="term">
+UART
+</span></dt><dd>
+        Universal asynchronous receiver transmitter
+</dd><dt><span class="term">
+USB
+</span></dt><dd>
+        Universal serial bus
+</dd><dt><span class="term">
+ST Site
+</span></dt><dd>
+        <a class="ulink" href="http://www.stlinux.com/drupal/csd" target="_top">http://www.stlinux.com/drupal/csd</a>
+</dd></dl></div></div><div class="chapter" title="Chapter 3. Overview"><div class="titlepage"><div><div><h2 class="title"><a id="_overview"></a>Chapter 3. Overview</h2></div></div></div><p>USB boot, on SPEAr platforms, provides the means to flash the binary
+images to the NOR/NAND flash using USB device port. This technique is
+introduced to avoid the need of any external H/W tool other than USB
+Host PC to bring up the board.</p><p>To use this feature, SPEAr Board needs to be booted in USB Boot Mode.
+The USB flashing utility is used on the USB host side to carry out
+flashing. Current version of this utility is available for Windows
+and Linux host machine.</p><p>The flashing utility is flexible enough to support other features beside
+flashing with some changes. These possible features have been described
+in Appendix. In general it supports following key features.</p><div class="section" title="3.1. Key Features"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="_key_features"></a>3.1. Key Features</h2></div></div></div><p>USB Flashing utility supports following features.</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+Ability to define partition layout for different memory (Nand/Nor)
+     chips with different sector/block size
+</li><li class="listitem">
+Save partition layout information in a file for later use
+</li><li class="listitem">
+Ability to flash images to any of the configured partition
+</li><li class="listitem">
+Support flashing jffs2 images for NAND
+</li><li class="listitem">
+Save configurations that define images to be flashed to partitions
+</li><li class="listitem">
+Receiving a binary file over USBTTY interface onto SPEAr board.
+</li><li class="listitem">
+Run U-Boot commands and receive response
+</li><li class="listitem">
+Update environment variables of u-boot
+</li></ul></div></div><div class="section" title="3.2. Features in v-2.4"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="_features_in_v_2_4"></a>3.2. Features in v-2.4</h2></div></div></div><p>This is a minor release with few bug fixes for default partition layout
+and firmware binaries updated against latest source.</p></div><div class="section" title="3.3. Features in v-2.3"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="_features_in_v_2_3"></a>3.3. Features in v-2.3</h2></div></div></div><p>Release V-2.3 has following additional features.</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+support for SPEAr1310 RevC board
+</li><li class="listitem">
+Existing SPEAr1310 has been renamed as SPEAr1310_revA and
+     SPEAr1310_revC is referred as SPEAr1310 everywhere.
+</li></ul></div></div><div class="section" title="3.4. Features in v-2.2"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="_features_in_v_2_2"></a>3.4. Features in v-2.2</h2></div></div></div><p>Release V-2.2 has following additional features.</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+asciidoc based documentation support
+</li><li class="listitem">
+Updated firmware (u-boot) binary for SPEAr1340 device
+</li><li class="listitem">
+several small fixes
+</li></ul></div></div><div class="section" title="3.5. Features in v-2.1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="_features_in_v_2_1"></a>3.5. Features in v-2.1</h2></div></div></div><p>Release V-2.1 has following additional features.</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+Faster file transfer due to enhanced Kermit implementation
+</li><li class="listitem">
+Support for SPEAr1340 device
+</li><li class="listitem">
+Support for Windows 7 64 bit, please refer installation on  Windows 7
+</li><li class="listitem">
+Command Interface to automate the flashing procedure
+</li><li class="listitem">
+saveenv command (U-Boot Command for USBTTY mode) to save environment
+     either in flash (nor) or in nand memory
+</li></ul></div></div></div><div class="chapter" title="Chapter 4. Installation on Windows Machine"><div class="titlepage"><div><div><h2 class="title"><a id="_installation_on_windows_machine"></a>Chapter 4. Installation on Windows Machine</h2></div></div></div><p>This section covers installation and configuration required at SPEAr and
+Host PC level in order to use Flashing tool. This step is mandatory
+before start using Flashing utility.</p><div class="section" title="4.1. Components Required"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="_components_required"></a>4.1. Components Required</h2></div></div></div><p>Following components are necessary to be installed on Host Windows PC to
+use the Flashing utility.</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+TCL-TK version 8.5
+</li><li class="listitem">
+libusb-0.1
+</li><li class="listitem">
+usbserial driver
+</li></ul></div><p>These are the pre-requisite for flashing utility. For windows, the
+libusb driver and usbserial driver are already present with the tool.
+TCL-TK has to be downloaded and installed from the following path
+<a class="ulink" href="http://www.activestate.com/activetcl/" target="_top">http://www.activestate.com/activetcl/</a></p><p>The Flashing tool uses TCL/TK to present the GUI interface for flashing.
+The libusb and usbserial drivers are used in different stages to provide
+the communication medium with the SPEAr board. This would be described
+in later sections.</p></div><div class="section" title="4.2. Installation Procedure"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="_installation_procedure"></a>4.2. Installation Procedure</h2></div></div></div><p>This section describes installation proceedure of flashing utility.</p><div class="section" title="4.2.1. Installing TCL/TK on Windows"><div class="titlepage"><div><div><h3 class="title"><a id="_installing_tcl_tk_on_windows"></a>4.2.1. Installing TCL/TK on Windows</h3></div></div></div><p>It is required to install the TCLTK support from the mentioned link
+before using the flashing tool. Please go to following web link for more
+details <a class="ulink" href="http://www.activestate.com/activetcl/" target="_top">http://www.activestate.com/activetcl/</a></p></div><div class="section" title="4.2.2. Board Configuration"><div class="titlepage"><div><div><h3 class="title"><a id="_board_configuration"></a>4.2.2. Board Configuration</h3></div></div></div><p>After installation, the SPEAr board must be connected to Windows Host
+machine through USB cable. SPEAr board must be configured in USB boot
+mode and then powered on.</p><p>To enable USB mode User should select proper dip switch configuration on
+the board.</p><p>Set following switch positions for SPEAr evaluation boards.</p><div class="table"><a id="id533120"></a><p class="title"><strong>Table 4.1. Boot Pin Selection</strong></p><div class="table-contents"><table summary="Boot Pin Selection" cellpadding="4px" style="border-collapse: collapse;border-top: 3px solid #527bbd; border-bottom: 3px solid #527bbd; " width="50%"><colgroup><col class="col_1" /><col class="col_2" /></colgroup><thead><tr><th style="border-right: 1px solid #527bbd; border-bottom: 1px solid #527bbd; " align="left" valign="top"> SoC        </th><th style="border-bottom: 1px solid #527bbd; " align="left" valign="top"> Boot Pin</th></tr></thead><tbody><tr><td style="border-right: 1px solid #527bbd; border-bottom: 1px solid #527bbd; " align="left" valign="top"><p>SPEAr600</p></td><td style="border-bottom: 1px solid #527bbd; " align="left" valign="top"><p>set SW2-5 ON</p></td></tr><tr><td style="border-right: 1px solid #527bbd; border-bottom: 1px solid #527bbd; " align="left" valign="top"><p>SPEAr300</p></td><td style="border-bottom: 1px solid #527bbd; " align="left" valign="top"><p>set SW3-1, SW3-2, SW3-3 and SW3-4 ON</p></td></tr><tr><td style="border-right: 1px solid #527bbd; border-bottom: 1px solid #527bbd; " align="left" valign="top"><p>SPEAr310</p></td><td style="border-bottom: 1px solid #527bbd; " align="left" valign="top"><p>set SW2-6 ON and SW2-7, SW2-8 OFF</p></td></tr><tr><td style="border-right: 1px solid #527bbd; border-bottom: 1px solid #527bbd; " align="left" valign="top"><p>SPEAr320</p></td><td style="border-bottom: 1px solid #527bbd; " align="left" valign="top"><p>set SW2-1, SW2-3, SW2-5, SW2-7 OFF SW2-2, SW2-4, SW2-6, SW2-8 ON</p></td></tr><tr><td style="border-right: 1px solid #527bbd; border-bottom: 1px solid #527bbd; " align="left" valign="top"><p>SPEAr13xx</p></td><td style="border-bottom: 1px solid #527bbd; " align="left" valign="top"><p>set SW3-1, SW3-2 and SW3-3 ON and SW3-4 OFF</p></td></tr><tr><td style="border-right: 1px solid #527bbd; " align="left" valign="top"><p>SPEAr1340</p></td><td style="" align="left" valign="top"><p>set SW3-1, SW3-2, SW3-3 ON and SW3-4 OFF</p></td></tr></tbody></table></div></div><br class="table-break" /><div class="note" title="Note" style="margin-left: 0; margin-right: 10%;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/icons/note.png" /></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>These switch settings may vary as per the board design and are
+directly related to boot pin configuration for each platform. Details
+can be found in corresponding device reference manual and SPEAr board
+reference manual</p></td></tr></table></div></div><div class="section" title="4.2.3. Board Power-ON"><div class="titlepage"><div><div><h3 class="title"><a id="_board_power_on"></a>4.2.3. Board Power-ON</h3></div></div></div><p>After making the above switch settings, power ON the board. Now the
+board will boot in the USB-Boot mode. In this mode SPEAr acts as the USB
+device which can receive bulk data on USB channel. Drivers for this
+device need to be installed before using this device. The driver for
+this device is available with the package and can be located in setup/
+folder.</p></div><div class="section" title="4.2.4. Installing lib-usb driver"><div class="titlepage"><div><div><h3 class="title"><a id="_installing_lib_usb_driver"></a>4.2.4. Installing lib-usb driver</h3></div></div></div><p>Lib-USB driver is used to send initial DDR and firmware binary to the
+SPEAr. This set of firmware is executed by the BOOTROM code. These
+binaries initialize DDR and provide suitable interface (usbtty in this
+case) so that further activities of flashing can be carried. As soon as
+the board is powered on and the USB cable is connected to Windows Host
+PC, the Windows Host PC would prompt for a found device message and will
+ask for a suitable driver.</p><div class="figure"><a id="id533341"></a><p class="title"><strong>Figure 4.1. Found New Hardware</strong></p><div class="figure-contents"><div class="mediaobject"><img src="images/found-new-hw.png" alt="images/found-new-hw.png" /></div></div></div><br class="figure-break" /><p>Unpack Setup/Win7/zadig_v1.1.1.140.7z and execute the zadig.exe. Choose
+the SPEAr device and in the backend libusb0.
+Click ‘Install Driver’ to install the lib-usb driver.</p><div class="figure"><a id="id533369"></a><p class="title"><strong>Figure 4.2. Install libusb driver</strong></p><div class="figure-contents"><div class="mediaobject"><img src="images/zadig.png" alt="images/zadig.png" /></div></div></div><br class="figure-break" /><p>This would install the lib-usb driver for corresponding SPEAr device and
+windows device manager would show following entry.</p><div class="figure"><a id="id533396"></a><p class="title"><strong>Figure 4.3. libusb driver installed</strong></p><div class="figure-contents"><div class="mediaobject"><img src="images/libusb.png" alt="images/libusb.png" /></div></div></div><br class="figure-break" /><p>Next step is to send the flashing firmware to SPEAr device and install
+usb-serial driver. The usbtty interface exported by this serial driver
+is used by the flasher to perform flashing operations</p></div><div class="section" title="4.2.5. Installing usbserial driver"><div class="titlepage"><div><div><h3 class="title"><a id="_installing_usbserial_driver"></a>4.2.5. Installing usbserial driver</h3></div></div></div><p>After lib-usb in the above mentioned step is installed, USB flashing
+utility can be used to connect to the SPEAr board. During the connect
+operation Flashing tool sends the DDR driver and firmware (using
+lib-usb) interface. These binaries are present in binaries/ folder of
+the package.</p><p>Follow these steps to initiate this connection</p><p>Run the flasher-gui.tcl file contained in the Flashing Utility folder. A
+new window would appear on screen</p><div class="figure"><a id="id533449"></a><p class="title"><strong>Figure 4.4. SPEAr Flashing Utility</strong></p><div class="figure-contents"><div class="mediaobject"><img src="images/spear-utils.png" alt="images/spear-utils.png" /></div></div></div><br class="figure-break" /><p>Make sure that the board is powered and connected to the Windows
+machine. Click on the connect button. This would transmit the initial
+binaries to the SPEAr which would be executed by BootROM code. On
+execution this firmware would disconnect from usb and would try to
+enumerate as usb serial device.</p><div class="figure"><a id="id533479"></a><p class="title"><strong>Figure 4.5. Install usb-serial driver</strong></p><div class="figure-contents"><div class="mediaobject"><img src="images/spear-soc.png" alt="images/spear-soc.png" /></div></div></div><br class="figure-break" /><p>Windows by itself would not be able to install the driver. Choose manual
+installation.</p><p>When asked for the driver files browse through Setup/Win7 and choose
+spear_comport.inf. Proceed and complete the installation. Windows would
+now show a new com port entry in the device manager</p><div class="figure"><a id="id533512"></a><p class="title"><strong>Figure 4.6. Enumerated serial port</strong></p><div class="figure-contents"><div class="mediaobject"><img src="images/spear-com.png" alt="images/spear-com.png" /></div></div></div><br class="figure-break" /><p>This completes the required install of drivers for flashing utility. One
+can use this com port just like any other serial port. Flashing utility
+would use this interface to flash the binaries. Please proceed to next
+sections for details on flashing.</p></div></div><div class="section" title="4.3. Compilation of usb_send and ukermit"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="_compilation_of_usb_send_and_ukermit"></a>4.3. Compilation of usb_send and ukermit</h2></div></div></div><p>usb_send is used to connect the board with host PC and ukermit is used to
+load the binary file. Their compiled binaries are already included in
+<span class="emphasis"><em>Tools/Windows/</em></span>.</p><p>User can make changes in usb_send and ukermit utilities to suit there
+needs. To recompile the binaries following components are required.</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+gcc compiler
+</li><li class="listitem">
+libusb development library which is already present in
+      <span class="emphasis"><em>Tools/src/usb_send/lib/Win/</em></span>
+</li></ul></div><p>To compile the usb_send,</p><p>Go to directory: flasher/Tools/src/usbsend/</p><pre class="literallayout"># make WINDOWS=1</pre><p>Move usbsend.exe to directory: flasher/Tools/Win/</p><p>To compile the ukermit,</p><p>Go to directory: flasher/Tools/src/ukermit/</p><pre class="literallayout"># make WINDOWS=1</pre><p>Move ukermit.exe to directory: flasher/Tools/Win/</p><div class="note" title="Note" style="margin-left: 0; margin-right: 10%;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/icons/note.png" /></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>flasher/Tools/Win/ is the default location from where flasher
+picks up the usb_send and ukermit tools binaries.</p></td></tr></table></div></div></div><div class="chapter" title="Chapter 5. Installation on Linux Machine"><div class="titlepage"><div><div><h2 class="title"><a id="_installation_on_linux_machine"></a>Chapter 5. Installation on Linux Machine</h2></div></div></div><p>This section covers installation and configuration required at SPEAr and
+Linux Host PC level in order to use Flashing tool. This step is mandatory
+before start using Flashing utility.</p><p>This section also deals with the compilation of the binaries for usb_send
+and ukermit.</p><div class="section" title="5.1. Components Required"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="_components_required_2"></a>5.1. Components Required</h2></div></div></div><p>Following components are necessary to be installed on Host PC to
+use the Flashing utility.</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+TCL-TK version 8.5
+</li><li class="listitem">
+libusb0.1
+</li></ul></div><p>For Linux you can install tck/tk (Version 8.5) through yum (on Fedora) or
+apt-get (on Ubuntu).</p><p>The Flashing tool uses TCL/TK to present the GUI interface for flashing.</p></div><div class="section" title="5.2. Installation Procedure"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="_installation_procedure_2"></a>5.2. Installation Procedure</h2></div></div></div><p>This section describes the installation procedure of flashing utility.</p><div class="section" title="5.2.1. Installing TCL/TK on Linux"><div class="titlepage"><div><div><h3 class="title"><a id="_installing_tcl_tk_on_linux"></a>5.2.1. Installing TCL/TK on Linux</h3></div></div></div><p>One can use following command on Fedora to install tcl/tk</p><pre class="literallayout"># yum install tcltk8.5</pre></div><div class="section" title="5.2.2. Installing libusb on Linux"><div class="titlepage"><div><div><h3 class="title"><a id="_installing_libusb_on_linux"></a>5.2.2. Installing libusb on Linux</h3></div></div></div><p>To install libusb on Fedora following command can be used</p><pre class="literallayout"># yum install libusb</pre><p>This completes the required install of components for flashing utility.
+Flashing utility would use this interface to flash the binaries.</p></div></div><div class="section" title="5.3. Compilation of usb_send and ukermit"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="_compilation_of_usb_send_and_ukermit_2"></a>5.3. Compilation of usb_send and ukermit</h2></div></div></div><p>usb_send is used to connect the board with host PC and ukermit is used to
+load the binary file. Their compiled binaries are already included in
+<span class="emphasis"><em>Tools/Linux/</em></span>.</p><p>User can make changes in usb_send and ukermit utilities to suit there
+needs. To recompile the binaries following components are required.</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+gcc compiler
+</li><li class="listitem">
+libusb0.1 development libraries
+</li></ul></div><p>To compile the usb_send,</p><p>Go to directory: <span class="emphasis"><em>flasher/Tools/src/usbsend/</em></span></p><pre class="literallayout"># make</pre><p>Move the binary generated to the directory: flasher/Tools/Linux/</p><p>To compile the ukermit,</p><p>Go to directory: flasher/Tools/src/ukermit/</p><pre class="literallayout"># make</pre><p>Move the binary generated to the directory: flasher/Tools/Linux/</p><p>flasher/Tools/Linux/ is the default location from where flasher picks up
+the usb_send and ukermit tools binaries.</p></div><div class="section" title="5.4. Run Flashing utility as non root user"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="_run_flashing_utility_as_non_root_user"></a>5.4. Run Flashing utility as non root user</h2></div></div></div><p>Flashing utility have to access USB bus in order to communicate with
+SPEAr boards.</p><p>By default, in a Linux system only user "root" has the required privileges
+to access to system devices.
+Using "root" in the host PC for common tasks like upgrading board
+firmware is highly discouraged, since any command wrongly typed
+can lead to undesired changes in system configuration and, in worst case,
+determine system instability.</p><p>This chapter explains how to use the Linux system tool "udev" for
+configuring a Linux system to dynamically assign the proper permission
+to the USB devices associated to SPEAr.
+This is enough to allows unprivileged users (non "root") to use Flashing utility.</p><p>Flashing utility needs to use two classes of USB devices:</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+SPEAr boot ROM USB device
+</li><li class="listitem">
+USB serial emulation device
+</li></ul></div><p>The unprivileged user intended to run Flashing utility have to be
+allowed to access to both classes.</p><p>To enable access to SPEAr boot ROM USB device, Flashing utility
+provides an "udev" rules script in folder "contrib".
+The script have to be copied in the "udev" configuration folder, then
+"udev" have to be instructed to reload the configuration.
+As "root", type:</p><pre class="literallayout"># cp contrib/udev.rules /etc/udev/rules.d/95-spear.rules
+# udevadm control --reload-rules</pre><p>Such script assigns to group "plugdev" the USB device of SPEAr.
+In order to use Flashing utility, user have to be part of the group "plugdev".</p><p>First of all, group "plugdev" must be created if not already present.
+Type</p><pre class="literallayout"># getent group | grep ^plugdev:
+plugdev:x:501:user1</pre><p>to determine if the group is already present. Expected output would be similar to
+the text reported above.
+In case of no output, the group does not exist and have to be created with command</p><pre class="literallayout"># groupadd plugdev</pre><p>Then, unprivileged user have to be added to group "plugdev".
+As example, user "stm" is added to "plugdev" with following command.</p><pre class="literallayout"># usermod -a -G plugdev stm</pre><p>To verify that user "stm" is correctly added to the group, type</p><pre class="literallayout"># id stm
+uid=500(stm) gid=500(stm) groups=500(stm),501(plugdev)</pre><p>The output reports all the groups the user belongs. "plugdev" must be
+in the list, as in the example.</p><p>At last, user access have to be granted also for USB serial emulation devices.
+"udev" rules for this purpose are normally part of Linux distribution.
+In Fedora Linux, every serial device is assigned to group "dialout".
+You can check permission of default serial port</p><pre class="literallayout"># ls -l /dev/ttyS*
+crw-rw----. 1 root dialout 4, 64 May 17 13:48 /dev/ttyS0</pre><p>By adding unprivileged user to group "dialout" (in Fedora), the user
+would be able to access to every USB serial emulation device. In the
+example below it’s used again user "stm"</p><pre class="literallayout"># usermod -a -G dialout stm</pre><p>The modification to user group would be effective after next login
+of the user.
+If you are logged in as unprivileged user and then switched to "root"
+to type the commands above, then logout and login again to activate
+the modifications.
+No need to reboot your Linux box.</p><p>By allowing unpriviledged user to access to serial devices, the
+user will be also able to run serial communication programs, e.g.
+"minicom", without need for "root" privileges.</p></div></div><div class="chapter" title="Chapter 6. GUI Usage"><div class="titlepage"><div><div><h2 class="title"><a id="_gui_usage"></a>Chapter 6. GUI Usage</h2></div></div></div><p>Once installed, the USB tool can now be used to upgrade and erase the
+flashes (NOR/ NAND) on board. The following sections define how to use
+the USB Flashing tool through the GUI.</p><div class="section" title="6.1. Selection of SOC"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="_selection_of_soc"></a>6.1. Selection of SOC</h2></div></div></div><p>Each time the utility (flasher-gui.tcl) is executed, it retrives the device
+selected last time. SPEAr SOC can be selected from the combobox before
+connecting.This utility supports following different SPEAr devices.</p><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem">
+SPEAr600
+</li><li class="listitem">
+SPEAr300
+</li><li class="listitem">
+SPEAr310
+</li><li class="listitem">
+SPEAr320
+</li><li class="listitem">
+SPEAr1300
+</li><li class="listitem">
+SPEAr1310_reva
+</li><li class="listitem">
+SPEAr1310
+</li><li class="listitem">
+SPEAr900
+</li><li class="listitem">
+SPEAr1340
+</li></ol></div><p>Select appropriate SoC according to the SPEAr device going to be used</p></div><div class="section" title="6.2. Connecting to the Device"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="_connecting_to_the_device"></a>6.2. Connecting to the Device</h2></div></div></div><p>After selecting the appropriate SOC, press the connect button to connect
+to the device. Each time the connect button is pressed the utility tries
+to send the initial firmware to the device which in turn exposes tty
+over usb interface. This is in accordance with steps mentioned in
+installation procedure. However user need not install driver every time
+as this will automatically be done the operating system.</p><div class="figure"><a id="id534106"></a><p class="title"><strong>Figure 6.1. SPEAr Flashing Utility</strong></p><div class="figure-contents"><div class="mediaobject"><img src="images/spear-utils.png" alt="images/spear-utils.png" /></div></div></div><br class="figure-break" /></div><div class="section" title="6.3. Flashing utility Configuration"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="_flashing_utility_configuration"></a>6.3. Flashing utility Configuration</h2></div></div></div><p>The flashing utility needs to be configured so that it becomes aware of
+the flash memory and its partitions and layout details.</p><p>For this click on the Setup menu and Setup Memories Partitions. The
+partitions can now be added or removed. 0x10000 and 0x4000 is the
+default erase size (which is equal to sector size for Serial NOR Flash
+and Block Size for NAND Flash device). This erase size can be selected
+once all the partitions in the specific memory are removed. The environment
+variable can be saved either in NOR or in NAND memory.</p><div class="figure"><a id="id534151"></a><p class="title"><strong>Figure 6.2. Configure partition layout</strong></p><div class="figure-contents"><div class="mediaobject"><img src="images/flash-config.png" alt="images/flash-config.png" /></div></div></div><br class="figure-break" /><p>This is a onetime setting and the partition setup is saved in a file
+once the Save button is clicked for the selected SPEAr SOC device in the combo
+box. It can then be accessed or modified by clicking on Setup menu →
+Setup Memories/Partitions.</p><p>Note: Configuration file for each SPEAr device is saved independently</p><p>To change the sector/block size of devices user first have to delete all
+the existing partitions and then select new size from the list box. For
+deleting partition click on Remove partition and once all the partition
+deleted then selects new size and click on Add partition.</p></div><div class="section" title="6.4. Erasing Partitions"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="_erasing_partitions"></a>6.4. Erasing Partitions</h2></div></div></div><p>Click on the Erase button Select the partitions to erase and click on
+erase button to erase the selected partitions.</p><div class="figure"><a id="id534202"></a><p class="title"><strong>Figure 6.3. Flash erase</strong></p><div class="figure-contents"><div class="mediaobject"><img src="images/flash-erase.png" alt="images/flash-erase.png" /></div></div></div><br class="figure-break" /></div><div class="section" title="6.5. Programming Partitions"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="_programming_partitions"></a>6.5. Programming Partitions</h2></div></div></div><p>Click on program button, to program various defined partitions of the
+NOR or/and NAND.</p><div class="figure"><a id="id534238"></a><p class="title"><strong>Figure 6.4. Flash Program</strong></p><div class="figure-contents"><div class="mediaobject"><img src="images/flash-program.png" alt="images/flash-program.png" /></div></div></div><br class="figure-break" /><p>Select the partitions to program through check-buttons and select the
+binary files for each selected partition. Uncheck buttons for the
+partitions which you do not want to program.</p><p>Click on program binaries button to write to the flash.</p><p>The programming configuration can be saved in a file for further use.
+The configuration saved as defConf.conf is default configuration that
+opens when Program button is clicked. Overwrite this configuration
+according to your PC paths.</p><p>Note: The COM port selected in the main window should be the gadget
+serial COM port number. It can be seen from the device manager window.</p><div class="figure"><a id="id534280"></a><p class="title"><strong>Figure 6.5. Serial Port Interface</strong></p><div class="figure-contents"><div class="mediaobject"><img src="images/flash-com-port.png" alt="images/flash-com-port.png" /></div></div></div><br class="figure-break" /></div><div class="section" title="6.6. Executing U-boot Commands Script"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="_executing_u_boot_commands_script"></a>6.6. Executing U-boot Commands Script</h2></div></div></div><p>USB Flashing utility provides an additional feature that user can run
+U-boot commands through script file. For that user have to write a
+script file or a text file that contains all the u-boot commands in
+sequence.</p><p>To load the script file click on "Run Script”, it asks from where to get
+the script file and then load the file. It launches command written in
+the script file or text file one by one. Make sure that the script file
+is written properly.</p><p>For example a script file contains following commands in sequence:</p><pre class="literallayout">print
+version</pre><p>Click on Run Script and select this file for execution. It generates
+output as shown in the figure bellow.</p><div class="figure"><a id="id534339"></a><p class="title"><strong>Figure 6.6. Run U-boot Command</strong></p><div class="figure-contents"><div class="mediaobject"><img src="images/flash-run-command.png" alt="images/flash-run-command.png" /></div></div></div><br class="figure-break" /></div></div><div class="chapter" title="Chapter 7. Command Interface Usage"><div class="titlepage"><div><div><h2 class="title"><a id="_command_interface_usage"></a>Chapter 7. Command Interface Usage</h2></div></div></div><p>Command Interface can be used to upgrade and erase the flashes (NOR/ NAND) on
+board. It can also used for automating the flashing procedure. Command
+Interface is supported on the Windows (DOS) as well as on Linux Host Machine.</p><p>Command Interface (flasher.tcl) can be invoked in the following modes:</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p class="simpara">
+Interactive Mode
+</p><pre class="literallayout"># tclsh flasher.tcl -i</pre></li><li class="listitem"><p class="simpara">
+Script/File Mode (flasher
+</p><pre class="literallayout"># tclsh flasher.tcl -f script.txt</pre></li><li class="listitem"><p class="simpara">
+GUI Mode
+</p><pre class="literallayout"># tclsh flasher.tcl
+or
+# wish flasher-gui.tcl</pre></li></ul></div><div class="note" title="Note" style="margin-left: 0; margin-right: 10%;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/icons/note.png" /></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>Install cmdline package before using the command interface. With
+Activetcl, it is already installed on Windows machine. Install with yum or
+apt-get on linux platform</p></td></tr></table></div><div class="note" title="Note" style="margin-left: 0; margin-right: 10%;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/icons/note.png" /></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>Ensure that the executable is installed with a name <code class="literal">tclsh</code> eg.
+the binary name is <code class="literal">tclsh85</code> for tcl-8.5 installation. In such case,
+create a soft link with the link name as tclsh.</p></td></tr></table></div><div class="section" title="7.1. Interactive Mode"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="_interactive_mode"></a>7.1. Interactive Mode</h2></div></div></div><p>Interactive mode provides following set of basic command for the flashing
+procedure:</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+[c]onnect : connects with the SPEAr device
+</li><li class="listitem">
+[s]end : to load file to the SPEAr device
+</li><li class="listitem">
+[f]lash : to flash the nand/nor memory
+</li><li class="listitem">
+[u]cmd : runs the basic U-boot command
+</li><li class="listitem">
+c[o]nfig : config reads the configuration file
+</li><li class="listitem">
+e[x]it: exits the interactive mode
+</li><li class="listitem">
+[h]elp: prints help for interactive mode
+</li><li class="listitem">
+sa[v]eenv: save environment variable in either nand or nor memory
+</li></ul></div><div class="important" title="Important" style="margin-left: 0; margin-right: 10%;"><table border="0" summary="Important"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Important]" src="images/icons/important.png" /></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>Apart from this commands , user can run U-boot commands
+directly on the console.So if the interface founds any such command
+which is not from the above list, it runs the command on the U-Boot.</p></td></tr></table></div><div class="section" title="7.1.1. connect command"><div class="titlepage"><div><div><h3 class="title"><a id="_connect_command"></a>7.1.1. connect command</h3></div></div></div><p>connect command runs the connect.tcl script. It sends the initial binaries for
+ddr driver and customized u-boot.</p><p>connect command takes argument for the device to be connected.</p><p>Short and Long argument option for the device can be -d and --device
+respectively.</p><pre class="literallayout"># flasher -i
+flasher&gt; connect --device SPEAr900
+or
+flasher&gt; c -d 900</pre><p>Following SPEAr SOC devices can be connected:</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+SPEAr300
+</li><li class="listitem">
+SPEAr310
+</li><li class="listitem">
+SPEAr320
+</li><li class="listitem">
+SPEAr600
+</li><li class="listitem">
+SPEAr900
+</li><li class="listitem">
+SPEAr1300
+</li><li class="listitem">
+SPEAr1310_reva
+</li><li class="listitem">
+SPEAr1310
+</li><li class="listitem">
+SPEAr1340
+</li></ul></div><p>Argument can be SPEArxxx or xxx, in case of xxx argument it concatenates
+the string "SPEAr" with xxx.Here xxx can be
+300/310/320/600/900/1300/1310_reva/1310/1340</p><div class="figure"><a id="id534626"></a><p class="title"><strong>Figure 7.1. connect command</strong></p><div class="figure-contents"><div class="mediaobject"><img src="images/cmdusage1.png" alt="images/cmdusage1.png" /></div></div></div><br class="figure-break" /></div><div class="section" title="7.1.2. send command"><div class="titlepage"><div><div><h3 class="title"><a id="_send_command"></a>7.1.2. send command</h3></div></div></div><p>Once the device is connected, it gives the u-boot environment which is
+used to perform further flashing procedure.</p><p>send command is used to load the image file in the memory.send command
+runs the send.tcl script which in turn invokes the ucmd.tcl script for
+u-boot command and ukermit binary for file transfer.It ensures the valid
+file path.</p><p>It does following tasks in order:</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+runs loadb command on the u-boot
+    (loadb: load binary file over serial line (kermit mode) )
+</li><li class="listitem">
+executes the ukermit binary, which transmits the image file
+</li><li class="listitem">
+runs imi command on the u-boot
+    (imi: prints the image information loaded in the memory)
+</li></ul></div><p>send command load the image file at the address 0x800000 by default.It takes the
+single argument for the file path. Argument for port and the load address is
+optional.</p><pre class="literallayout">flasher&gt; send --file ../lsp/spear300_xlaoder.img
+or
+flasher&gt; s -f ./lsp/spear3xx_uImage.img -a 0x130000 -p COM5</pre><div class="figure"><a id="id534712"></a><p class="title"><strong>Figure 7.2. send command</strong></p><div class="figure-contents"><div class="mediaobject"><img src="images/cmdusage2.png" alt="images/cmdusage2.png" /></div></div></div><br class="figure-break" /></div><div class="section" title="7.1.3. flash command"><div class="titlepage"><div><div><h3 class="title"><a id="_flash_command"></a>7.1.3. flash command</h3></div></div></div><p>flash command is used to flash the images at any address in the nor and nand
+memory. It is based on the script flash.tcl which in turn depend on the send.tcl
+script for loading the image into the memory and ucmd.tcl script to run the
+u-boot command.</p><p>It does following task in order:</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+load the image in the memory at address 0x800000
+</li><li class="listitem">
+calculate the filesize and align it with the sector size of the nand or nor
+     memory
+</li><li class="listitem">
+erase the nor or nand memory from the base address till the aligned
+     size of file
+</li><li class="listitem">
+copy the image file from the memory to the nand or nor memory
+</li></ul></div><div class="note" title="Note" style="margin-left: 0; margin-right: 10%;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/icons/note.png" /></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>The sector size for Nor memory is assumed to be 0x10000. The
+sector size for nand memory will be found by running nand info command.</p></td></tr></table></div><p>flash command takes following three argument:</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+-f / --file    : file path to be flashed
+</li><li class="listitem">
+-a / --address : base address of nor or nand memory at which image
+     will be flashed
+</li><li class="listitem">
+-m / --memory  : nor / nand memory
+</li></ul></div><p>Argument for the port is optional.</p><pre class="literallayout">flasher&gt; flash --file ../lsp/spear300_xlaoder.img --address 0xe6000000 --memory nor
+or
+flasher&gt; f -f ./lsp/spear3xx_uImage.img -a 0xe6000000 -p COM5 -m nor</pre><div class="figure"><a id="id534833"></a><p class="title"><strong>Figure 7.3. flash command</strong></p><div class="figure-contents"><div class="mediaobject"><img src="images/cmdusage3.png" alt="images/cmdusage3.png" /></div></div></div><br class="figure-break" /></div><div class="section" title="7.1.4. ucmd command"><div class="titlepage"><div><div><h3 class="title"><a id="_ucmd_command"></a>7.1.4. ucmd command</h3></div></div></div><p>ucmd command is used to run the U-Boot command.It is  uses the ucmd.tcl script.</p><p>It takes the command to be run as argument. Argument for the port and the expect
+string is optional. In default case port is found by listing all the COM
+(on Windows) or /dev/ttyACM (on Linux) ports on host machine and selects
+last port created from the list. Expect string or end by default is "u-boot&gt;".</p><p>U-Boot commands can be run direcly on the console.Hence following two
+example commands produces same result.</p><pre class="literallayout">flasher&gt; ucmd -c print
+or
+flasher&gt; print</pre><div class="figure"><a id="id534887"></a><p class="title"><strong>Figure 7.4. ucmd command</strong></p><div class="figure-contents"><div class="mediaobject"><img src="images/cmdusage4.png" alt="images/cmdusage4.png" /></div></div></div><br class="figure-break" /></div><div class="section" title="7.1.5. config command"><div class="titlepage"><div><div><h3 class="title"><a id="_config_command"></a>7.1.5. config command</h3></div></div></div><p>config command is used to read the configuration file of the device. It takes
+the SPEAr SOC device as argument.</p><pre class="literallayout">flasher&gt; config SPEAr900</pre><div class="figure"><a id="id534930"></a><p class="title"><strong>Figure 7.5. config command</strong></p><div class="figure-contents"><div class="mediaobject"><img src="images/cmdusage5.png" alt="images/cmdusage5.png" /></div></div></div><br class="figure-break" /></div><div class="section" title="7.1.6. exit command"><div class="titlepage"><div><div><h3 class="title"><a id="_exit_command"></a>7.1.6. exit command</h3></div></div></div><p>It exits the interactive mode of the flasher.</p></div><div class="section" title="7.1.7. help command"><div class="titlepage"><div><div><h3 class="title"><a id="_help_command"></a>7.1.7. help command</h3></div></div></div><p>It prints the help for the interactive mode.</p><div class="figure"><a id="id534976"></a><p class="title"><strong>Figure 7.6. help command</strong></p><div class="figure-contents"><div class="mediaobject"><img src="images/cmdusage6.png" alt="images/cmdusage6.png" /></div></div></div><br class="figure-break" /></div><div class="section" title="7.1.8. saveenv command"><div class="titlepage"><div><div><h3 class="title"><a id="_saveenv_command"></a>7.1.8. saveenv command</h3></div></div></div><p>It is used to save the environment variables into either nand or nor memory.</p><p>saveenv command takes following two argument:</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+flash(nor)/nand memory
+</li><li class="listitem"><p class="simpara">
+address at which environment variables are stored
+</p><pre class="literallayout">flasher&gt; saveenv flash 0xe6040000</pre></li></ul></div></div></div><div class="section" title="7.2. Script Mode"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="_script_mode"></a>7.2. Script Mode</h2></div></div></div><p>Set of commands used in the interactive mode can be saved in text file.
+Flasher in script mode can be invoked on the command line which runs all
+the commands saved in previously stored in the text file.</p><p>One such example of script (text file) is shown below. First line in
+text connects with the device. Next three commands will flash the
+Xloader, u-Boot and Linux image in the nor memory at different
+addresses. Fifth command is not from the set of command of interface,
+hence it runs direcly on the U-Boot.</p><div class="example"><a id="id535062"></a><p class="title"><strong>Example 7.1. Example of Script (text file)</strong></p><div class="example-contents"><pre class="literallayout">1 connect --device SPEAr900
+2 flash --file ../../lsp/spear13xx_uImage.img --address 0xe6050000 --memory nor
+3 flash --file ../../lsp/spear900_xloader.img --address 0xe6000000 --memory nor
+4 flash --file ../../lsp/spear900_u-boot.img --address 0xe6010000 --memory nor
+5 version</pre></div></div><br class="example-break" /><div class="important" title="Important" style="margin-left: 0; margin-right: 10%;"><table border="0" summary="Important"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Important]" src="images/icons/important.png" /></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>Script mode can be used to automate the flashing procedure.</p></td></tr></table></div></div></div><div class="chapter" title="Chapter 8. Configuration"><div class="titlepage"><div><div><h2 class="title"><a id="_configuration"></a>Chapter 8. Configuration</h2></div></div></div><p>Configuration file of the device contains the information regarding the
+partition details on the NAND and NOR flashes. Configuration files
+(setupXXX.ini) is stored in the configuration folder of the package.</p><p>These configuration details is used by the flashing utility to program
+different modules (xloader, u-boot, Linux and rootfs) at their right
+partition or offset. This configuration or partition layout may vary
+from board to board.</p><p>Setup Partition Menu of the GUI utility retrieves the information
+regarding the partition of the device from such configuration files.
+Each device has separate configuration file. Depending on the device
+selected from the combo box, configuration file is loaded in the
+utility.</p><p>Configuration file of the device can be changed either directly editing
+the configuration file or with the help of setup partition menu
+(GUI). Configuration file can be print on command terminal in the command
+interface (refer config command)</p><p>The GUI of the Partition Menu is as shown in the following figure:</p><div class="figure"><a id="id535124"></a><p class="title"><strong>Figure 8.1. Configure partition layout</strong></p><div class="figure-contents"><div class="mediaobject"><img src="images/flash-config.png" alt="images/flash-config.png" /></div></div></div><br class="figure-break" /><p>The Configuration file for the SPEAr900 device is as following which can
+even be edited manually.</p><pre class="literallayout">Nor@0x10000
+Xloader@0@1
+UBoot@1@3
+Linux Image@5@44
+File System@49@79
+Nand@0x20000
+Xloader@0@1
+Xloader@1@1
+Xloader@2@1
+Xloader@3@1
+Uboot@4@12
+Linux Image@16@48
+File System@64@8128</pre><div class="note" title="Note" style="margin-left: 0; margin-right: 10%;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/icons/note.png" /></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>Xloader in nand is replicated 4 times in order to create
+redundancy against NAND block failures</p></td></tr></table></div></div><div class="chapter" title="Chapter 9. Flashing Utility Architecture"><div class="titlepage"><div><div><h2 class="title"><a id="_flashing_utility_architecture"></a>Chapter 9. Flashing Utility Architecture</h2></div></div></div><p>Flashing Utility Architecture uses different components at different
+stages to accomplish flashing operation.</p><p>In the very first stage the USB boot mode support available in SPEAr
+platform BootROM is used. In this mode the BootROM enumerate itself as a
+generic USB device capable of receiving and executing any binary
+transferred by USB host.</p><p>As soon as a binary/firmware is transferred from USB host, BootROM
+executes it and then the control can be taken over by the firmware
+itself to present any desired interface or to perform any task.</p><p>In the USB flashing utility this firmware is a DDR driver (xloader) and
+customized u-boot to enumerate SPEAr device as a serial device (tty over
+USB) which can then be used from host to send any u-boot command.</p><p>This interace is then used to execute u-boot commands to perform
+flashing operation. The Host side flashing GUI hides this complexity by
+offering a simple user interface for flashing operations.</p><div class="section" title="9.1. BootROM (USB boot)"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="_bootrom_usb_boot"></a>9.1. BootROM (USB boot)</h2></div></div></div><p>Refer BootROM manual of the respective SPEAr device.</p></div><div class="section" title="9.2. Flashing Utility Firmware (Xloader and U-Boot)"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="_flashing_utility_firmware_xloader_and_u_boot"></a>9.2. Flashing Utility Firmware (Xloader and U-Boot)</h2></div></div></div><p>As mentioned before, following are the steps involved in setting up the
+flashing interface on usb host.</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+Configure boot-strap for usb boot and power-on SPEAr
+</li><li class="listitem">
+Connect USB host which would see a vendor specific usb device
+</li><li class="listitem">
+SPEAr bootrom which exposes this interface receives Xloader from
+      usb host and execute it to initialize DDR
+</li><li class="listitem">
+After Xloader, u-boot is sent which is again executed by BootROM
+</li><li class="listitem">
+u-boot takes over usb interface re-enumerating as usb-tty interface
+</li></ul></div><p>These steps leave U-Boot running on the SPEAr device. Now, U-Boot
+commands can be run on a serial interface exposed to the Host machine to
+support erasing and flashing of NAND and Serial NOR device. The U-boot
+source code is same available with SPEAr LSP. This special U-Boot boot
+loader is build to support TTY over USB.</p><p>To generate this firmware image, U-boot build has to be done in the
+following way:</p><pre class="literallayout">$ make spearXXX_usbtty_config</pre><p>Similarly, DDR2 driver image can be generated from Xloader source using
+the following command:</p><pre class="literallayout">$ make spearXXX_usbtty_config</pre></div><div class="section" title="9.3. tty over USB"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="_tty_over_usb"></a>9.3. tty over USB</h2></div></div></div><p>The USB serial device driver provides serial port emulation on Windows
+operating systems by implementing a serial link emulation protocol on
+USB. The driver exposes a Win32-compatible COM port and in addition
+provides some unique features such as a Plug-Play compliant device
+instance enumeration method. This avoids confusion about COM port
+numbers and improves usability. The CDC ACM driver on Windows exposes
+the USB device as a virtual COM port to the operation system</p><p>The USB serial driver enables sending both data and command either
+through ACM or through serial emulation.</p><p>tty over USB Features:</p><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem">
+Exposes a virtual COM port that is compatible with the Win32
+serial port
+</li><li class="listitem">
+COM port can be used by standard Windows programs such as
+HyperTerminal
+</li><li class="listitem">
+COM port name gets assigned automatically
+</li><li class="listitem">
+Supports add and remove notifications and a Plug &amp; Play
+compliant port enumeration and identification method that is not based
+on COM port names
+</li><li class="listitem">
+Optional static COM port behavior to support legacy applications. The
+application can keep the COM port opened while the device is removed and
+continue the communication if the device is reconnected.
+</li></ol></div></div><div class="section" title="9.4. tty over USB Usage in Flashing Utilities"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="_tty_over_usb_usage_in_flashing_utilities"></a>9.4. tty over USB Usage in Flashing Utilities</h2></div></div></div><p>The exposed TTY interface (TTY over USB) can be used on the Host side as
+a U-Boot console to send commands and receive response. This enables to
+run all the U-Boot commands over the USBTTY link. Also, the same link is
+used to download Binary Images at virtually the USB speed through
+standard Kermit protocol.</p><p>For example, erasing a partition in Serial NOR chip can be easily done
+by sending the command</p><pre class="literallayout">erase 1:5-10</pre></div></div><div class="chapter" title="Chapter 10. USB Flashing Package Layout"><div class="titlepage"><div><div><h2 class="title"><a id="_usb_flashing_package_layout"></a>Chapter 10. USB Flashing Package Layout</h2></div></div></div><p>Following figure explains the usb flashing package layout.</p><pre class="literallayout">USB Flashing Utility
+        |
+        |
+        +---- Binaries/
+        |
+        +---- Setup/
+        |       |
+        |       +-------- WinXP/
+        |       |
+        |       +-------- Win7/
+        |
+        +---- Configuration/
+        |
+        +---- Tools/
+        |       |
+        |       |
+        |       +--------- Win/
+        |       |
+        |       |
+        |       +--------- Linux/
+        |       |
+        |       |
+        |       +--------+ src/
+        |                |
+        |                +-------- usb_send/
+        |                |
+        |                |
+        |                +-------- ukermit/
+        |
+        +---- Scripts/
+        |
+        +---- Doc/
+        |
+        +---- Contrib/</pre><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+Binaries/ contain the initial firmware binaries used to initialize
+     DDR and bring up ttyUSB interface.
+</li><li class="listitem">
+Setup/ contains driver and its inf files
+</li><li class="listitem">
+Configurations/ contains the configuration files for each device
+     for flashing images to their respective partitions
+</li><li class="listitem">
+Scripts/ contain test script demonstrating u-boot command executions
+</li><li class="listitem">
+Tools/ contain basic tools to send initial firmware to BootROM
+     through lib-usb and ukermit to send binary images over ttyUSB
+     interface.
+</li><li class="listitem">
+Doc/ contain the USB flashing utility usage help
+</li><li class="listitem">
+Contrib/ contain the rules file for "udev" system tool
+</li></ul></div></div><div class="chapter" title="Chapter 11. Appendix"><div class="titlepage"><div><div><h2 class="title"><a id="_appendix"></a>Chapter 11. Appendix</h2></div></div></div><p>This section is an Appendix to the above sections and describes some
+important aspects of the flashing utility.</p><div class="section" title="11.1. Known Issues"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="_known_issues"></a>11.1. Known Issues</h2></div></div></div><p>There is some known issue with the utility as of now.</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+If the application hangs or has to be terminated abruptly, please
+     also kill wish85.exe and ukermit.exe from the Task manager before
+     re-running the application
+</li><li class="listitem">
+The flashing utility sometimes timeout waiting for the u-boot to
+     complete the command.
+</li></ul></div></div><div class="section" title="11.2. Derived Features"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="_derived_features"></a>11.2. Derived Features</h2></div></div></div><p>A host of features can be supported by using the key features of
+flashing utilities. A few of them are as below:</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+All the U-boot commands can be used to achieve desired purpose
+</li><li class="listitem">
+This tool can be used to load and execute any binary for diagnostic
+     purpose
+</li><li class="listitem">
+The command based interface can be used to automate the flashing
+     operation.
+</li></ul></div></div></div></div></body></html>

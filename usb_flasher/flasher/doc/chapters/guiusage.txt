@@ -1,0 +1,118 @@
+== GUI Usage ==
+
+Once installed, the USB tool can now be used to upgrade and erase the
+flashes (NOR/ NAND) on board. The following sections define how to use
+the USB Flashing tool through the GUI.
+
+=== Selection of SOC ===
+
+Each time the utility (flasher-gui.tcl) is executed, it retrives the device
+selected last time. SPEAr SOC can be selected from the combobox before 
+connecting.This utility supports following different SPEAr devices.
+
+   1. SPEAr600
+   2. SPEAr300
+   3. SPEAr310
+   4. SPEAr320
+   5. SPEAr1300
+   6. SPEAr1310_reva
+   7. SPEAr1310
+   8. SPEAr900
+   9. SPEAr1340
+
+Select appropriate SoC according to the SPEAr device going to be used
+
+=== Connecting to the Device ===
+
+After selecting the appropriate SOC, press the connect button to connect
+to the device. Each time the connect button is pressed the utility tries
+to send the initial firmware to the device which in turn exposes tty
+over usb interface. This is in accordance with steps mentioned in
+installation procedure. However user need not install driver every time
+as this will automatically be done the operating system.
+
+.SPEAr Flashing Utility
+image::images/spear-utils.png[]
+
+=== Flashing utility Configuration ===
+
+The flashing utility needs to be configured so that it becomes aware of
+the flash memory and its partitions and layout details. 
+
+For this click on the Setup menu and Setup Memories Partitions. The
+partitions can now be added or removed. 0x10000 and 0x4000 is the
+default erase size (which is equal to sector size for Serial NOR Flash
+and Block Size for NAND Flash device). This erase size can be selected
+once all the partitions in the specific memory are removed. The environment 
+variable can be saved either in NOR or in NAND memory.
+
+.Configure partition layout
+image::images/flash-config.png[]
+
+This is a onetime setting and the partition setup is saved in a file
+once the Save button is clicked for the selected SPEAr SOC device in the combo
+box. It can then be accessed or modified by clicking on Setup menu -> 
+Setup Memories/Partitions.
+
+Note: Configuration file for each SPEAr device is saved independently
+
+To change the sector/block size of devices user first have to delete all
+the existing partitions and then select new size from the list box. For
+deleting partition click on Remove partition and once all the partition
+deleted then selects new size and click on Add partition.
+
+=== Erasing Partitions ===
+
+Click on the Erase button Select the partitions to erase and click on
+erase button to erase the selected partitions.
+
+.Flash erase
+image::images/flash-erase.png[]
+
+=== Programming Partitions ===
+
+Click on program button, to program various defined partitions of the
+NOR or/and NAND.
+
+.Flash Program
+image::images/flash-program.png[]
+
+Select the partitions to program through check-buttons and select the
+binary files for each selected partition. Uncheck buttons for the
+partitions which you do not want to program.
+
+Click on program binaries button to write to the flash.
+
+The programming configuration can be saved in a file for further use.
+The configuration saved as defConf.conf is default configuration that
+opens when Program button is clicked. Overwrite this configuration
+according to your PC paths.
+
+Note: The COM port selected in the main window should be the gadget
+serial COM port number. It can be seen from the device manager window.
+
+.Serial Port Interface
+image::images/flash-com-port.png[]
+
+=== Executing U-boot Commands Script ===
+
+USB Flashing utility provides an additional feature that user can run
+U-boot commands through script file. For that user have to write a
+script file or a text file that contains all the u-boot commands in
+sequence.
+
+To load the script file click on "Run Script”, it asks from where to get
+the script file and then load the file. It launches command written in
+the script file or text file one by one. Make sure that the script file
+is written properly.
+
+For example a script file contains following commands in sequence:
+
+	print
+	version
+
+Click on Run Script and select this file for execution. It generates
+output as shown in the figure bellow.  
+
+.Run U-boot Command
+image::images/flash-run-command.png[]

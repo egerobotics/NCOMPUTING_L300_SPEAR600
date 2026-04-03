@@ -1,0 +1,26 @@
+== Appendix ==
+
+This section is an Appendix to the above sections and describes some
+important aspects of the flashing utility.
+
+=== Known Issues ===
+
+There is some known issue with the utility as of now. 
+
+   - If the application hangs or has to be terminated abruptly, please
+     also kill wish85.exe and ukermit.exe from the Task manager before
+     re-running the application 
+   - The flashing utility sometimes timeout waiting for the u-boot to
+     complete the command.
+
+=== Derived Features ===
+
+A host of features can be supported by using the key features of
+flashing utilities. A few of them are as below:
+
+   - All the U-boot commands can be used to achieve desired purpose
+   - This tool can be used to load and execute any binary for diagnostic
+     purpose
+   - The command based interface can be used to automate the flashing
+     operation.
+
