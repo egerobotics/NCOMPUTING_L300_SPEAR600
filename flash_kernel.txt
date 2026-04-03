@@ -1,0 +1,1 @@
+flash -m nand -f ../../buildroot/output/images/uImage -a 0x80000 -p /dev/ttyACM0

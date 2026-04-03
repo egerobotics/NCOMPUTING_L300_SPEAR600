@@ -1,0 +1,19 @@
+# This is run first except when booting in single-user mode.
+::sysinit:/etc/rc.sh
+
+::restart:/sbin/init
+::shutdown:/sbin/cleanup_daemon
+
+# Start user application
+#::respawn:/bin/application
+#::respawn:/usr/local/ncomputing/rcm-wrapper.sh
+#::respawn:/sbin/network_daemon
+#::respawn:/usr/local/bin/uxp_terminator
+
+# enabling this results in GUI segmentation error
+# hence commenting this application for this release
+#::respawn:/usr/local/ncomputing/screensaver
+
+# Must be last 'respawn' entry to avoid ^C problem
+# Start a shell on the console
+::respawn:-/bin/sh

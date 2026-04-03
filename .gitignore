@@ -1,0 +1,78 @@
+# Large toolchains and build artifacts
+eldk41/
+eldk41.iso
+eldk41_mnt/
+buildroot/
+linux-5.4.290/
+linux-5.4.290.tar.xz
+u-boot-spear/
+opkg-0.1.8/
+opkg-0.1.8.tar.gz
+
+# Large archives and binaries
+l300_FW_ver_*.tar.gz
+spear_300_320_320S_600_rootfs_nand_smallpage.zip
+usb_flasher_spear.zip
+*.pdf
+
+# Firmware binaries
+tftpboot/
+firmware/*.gz
+firmware/*.fwd
+firmware/*.bin
+firmware/*.img
+firmware/*.bot
+firmware/*.cer
+firmware/*.md5
+firmware/*.sgl
+firmware/*.ext2.gz
+firmware/*.sqsh
+firmware/_image.bot.extracted/
+firmware/squashfs/
+firmware/squashfs3/
+
+# Initramfs - only keep config files, not full rootfs
+firmware/initramfs_orig/bin/
+firmware/initramfs_orig/sbin/
+firmware/initramfs_orig/lib/
+firmware/initramfs_orig/usr/
+firmware/initramfs_orig/dev/
+firmware/initramfs_orig/proc/
+firmware/initramfs_orig/sys/
+firmware/initramfs_orig/tmp/
+firmware/initramfs_orig/mnt/
+firmware/initramfs_orig/writable/
+firmware/initramfs_orig/readable/
+firmware/initramfs_orig/qtgui/
+
+# Sensitive keys
+firmware/initramfs_orig/etc/dropbear/dropbear_*_host_key
+
+# Compiled binaries in fbvnc (keep source only)
+fbvnc/fbterm
+fbvnc/fbvnc
+fbvnc/fbvnc_bare
+fbvnc/fbvnc_server
+fbvnc/nxsh
+
+# Package source trees and archives (keep only build_pkg.sh)
+packages/repo/
+packages/nano-*/
+packages/strace-*/
+packages/htop-*
+packages/*.tar.*
+
+# USB flasher
+usb_flasher/
+
+# Embedded git repos
+tools/framebuffer-vncserver/
+
+# Recovery
+recovery/
+
+# Build logs
+build.log
+
+# xloader binary at root
+xloader_image.bin

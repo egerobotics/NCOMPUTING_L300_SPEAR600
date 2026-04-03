@@ -1,0 +1,1 @@
+flash -m nand -f ../../buildroot/output/images/rootfs.jffs2 -a 0x4A0000 -p /dev/ttyACM0

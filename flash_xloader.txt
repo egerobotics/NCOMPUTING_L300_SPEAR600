@@ -1,0 +1,1 @@
+flash -m nand -f ./Binaries/spr600_ddrdriver.bin -a 0x0 -p /dev/ttyACM0

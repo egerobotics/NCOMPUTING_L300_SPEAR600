@@ -1,0 +1,4 @@
+flash -m nand -f ../../u-boot-spear/u-boot.bin -a 0x20000 -p /dev/ttyACM0
+flash -m nand -f ../../buildroot/output/images/uImage -a 0x80000 -p /dev/ttyACM0
+flash -m nand -f ../../buildroot/output/images/spear600-evb.dtb -a 0x480000 -p /dev/ttyACM0
+flash -m nand -f ../../buildroot/output/images/rootfs.jffs2 -a 0x4A0000 -p /dev/ttyACM0
