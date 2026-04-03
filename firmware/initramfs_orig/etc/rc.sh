@@ -43,61 +43,12 @@
 /bin/ln -s ../event15 /dev/input/event15
 
 #---------------------------------------------
-# Mount the writable storage FS
+# JFFS2 mounts DISABLED — kernel built-in partition table
+# maps mtdblock2/3 over initramfs NAND area (0x600000).
+# Mounting jffs2 there erases the initramfs!
+# Original: mount -t jffs2 /dev/mtdblock2 /writable
+# Original: mount -t jffs2 /dev/mtdblock3 /readable
 
-/bin/mount -t jffs2 /dev/mtdblock2 /writable
-
-(
-/usr/local/bin/flock -x 200 || exit 1
-# verify the existence and size of config files during boot and do according adjustments
-[ -d /writable/config ] || /bin/mkdir -p /writable/config
-if [ ! -s /writable/config/uxp ] || ! /usr/local/bin/uxp_sanity_check.sh uxp ; then
-        if [ ! -s /writable/config/uxp_backup ] || ! /usr/local/bin/uxp_sanity_check.sh uxp_backup ; then
-                /bin/cp /etc/config/uxp.bak /writable/config/uxp_backup
-        fi
-        /bin/cp /writable/config/uxp_backup /writable/config/uxp
-else
-         /bin/cp /writable/config/uxp /writable/config/uxp_backup
-fi
-	grep "discovery_type" /writable/config/uxp > /dev/null && type=$(/usr/bin/uci -c /writable/config get uxp.service0.discovery_type)
-        if [ $type = 1 ]; then
-                /usr/bin/uci -c /writable/config set uxp.service0.discovery_type=5
-        fi
-sync
-if [ ! -L /etc/config/uxp ]; then
-	/bin/ln -s /writable/config/uxp /etc/config/uxp
-fi
-
-if [ ! -L /etc/config/uxp_backup ]; then
-	/bin/ln -s /writable/config/uxp_backup /etc/config/uxp_backup
-fi
-
-dn=`/usr/bin/uci get uxp.device0.name`
-echo device name is ....... $dn
-if [ $dn = "Tempest-template" ]; then
-	model=$(getdevprop sn|cut -c1-4)
-	model_s=$(getdevprop sn|cut -c5-5)
-	echo "dev name is ........ $dn"
-	if [ "${model}" = "L300" -a "${model_s}" = "E" ]; then
-		dn="L250-`/sbin/getdevprop mac| sed "s/://g" | tr '[:lower:]' '[:upper:]'`"
-	else
-        	dn="NC-`/sbin/getdevprop mac| sed "s/://g" | tr '[:lower:]' '[:upper:]'`"
-	fi
-        echo "updated to $dn"
-	/usr/bin/uci set uxp.device0.name=$dn
-	/usr/bin/uci commit uxp
-        /bin/cp -f /writable/config/uxp /writable/config/uxp_backup
-	
-fi
-echo $dn > /etc/hostname
-sync
-
-)200>/ncconfig.lock
-# copying the logos if present any 
-/bin/mount -t jffs2 /dev/mtdblock3 /readable
-if [ ! -f /qtgui/partner.png  -a  -f /readable/partner.png ]; then
-	/bin/cp /readable/partner*.png /qtgui/.
-fi
 # Setup network with fixed MAC
 ip link set eth0 down
 ip link set eth0 address 00:1A:2B:3C:4D:5E
@@ -125,7 +76,7 @@ if [ "${model}" != "L350" ]; then
 fi
 
 # Start framebuffer terminal
-fbterm &
+fbterm </dev/null >/dev/null 2>&1 &
 sleep 1
 echo "fbterm started"
 

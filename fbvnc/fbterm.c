@@ -18,9 +18,36 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <linux/fb.h>
+#include <linux/input.h>
 #include <sys/stat.h>
+#include <dirent.h>
 
 #define KBD_FIFO "/tmp/vnc_kbd"
+#define MAX_KBD_DEVS 4
+
+/* Linux keycode to ASCII mapping (unshifted / shifted) */
+static const char keymap_lower[128] = {
+	[2]='1', [3]='2', [4]='3', [5]='4', [6]='5', [7]='6', [8]='7', [9]='8', [10]='9', [11]='0',
+	[12]='-', [13]='=', [14]='\b', [15]='\t',
+	[16]='q', [17]='w', [18]='e', [19]='r', [20]='t', [21]='y', [22]='u', [23]='i', [24]='o', [25]='p',
+	[26]='[', [27]=']', [28]='\n',
+	[30]='a', [31]='s', [32]='d', [33]='f', [34]='g', [35]='h', [36]='j', [37]='k', [38]='l',
+	[39]=';', [40]='\'', [41]='`',
+	[43]='\\', [44]='z', [45]='x', [46]='c', [47]='v', [48]='b', [49]='n', [50]='m',
+	[51]=',', [52]='.', [53]='/',
+	[57]=' ',
+};
+static const char keymap_upper[128] = {
+	[2]='!', [3]='@', [4]='#', [5]='$', [6]='%', [7]='^', [8]='&', [9]='*', [10]='(', [11]=')',
+	[12]='_', [13]='+', [14]='\b', [15]='\t',
+	[16]='Q', [17]='W', [18]='E', [19]='R', [20]='T', [21]='Y', [22]='U', [23]='I', [24]='O', [25]='P',
+	[26]='{', [27]='}', [28]='\n',
+	[30]='A', [31]='S', [32]='D', [33]='F', [34]='G', [35]='H', [36]='J', [37]='K', [38]='L',
+	[39]=':', [40]='"', [41]='~',
+	[43]='|', [44]='Z', [45]='X', [46]='C', [47]='V', [48]='B', [49]='N', [50]='M',
+	[51]='<', [52]='>', [53]='?',
+	[57]=' ',
+};
 
 /* 8x16 bitmap font (CP437 basic ASCII 32-126) */
 /* Each char is 16 bytes, one byte per row, MSB left */
@@ -224,6 +251,10 @@ static int term_cols, term_rows;
 static int cur_col, cur_row;
 static int master_fd;
 static int fifo_fd = -1;
+static int kbd_fds[MAX_KBD_DEVS];
+static int kbd_count = 0;
+static int kbd_shift = 0;
+static int kbd_ctrl = 0;
 static pid_t child_pid;
 
 /* Colors: RGB */
@@ -503,6 +534,60 @@ static int fb_open(void)
 	return 0;
 }
 
+static void open_input_keyboards(void)
+{
+	int i;
+	char path[64];
+	for (i = 0; i < 16 && kbd_count < MAX_KBD_DEVS; i++) {
+		sprintf(path, "/dev/event%d", i);
+		int fd = open(path, O_RDONLY | O_NONBLOCK);
+		if (fd >= 0) {
+			kbd_fds[kbd_count++] = fd;
+			fprintf(stderr, "fbterm: opened %s\n", path);
+		}
+	}
+	if (kbd_count == 0)
+		fprintf(stderr, "fbterm: no input devices found\n");
+}
+
+static void handle_input_event(struct input_event *ev)
+{
+	if (ev->type != EV_KEY) return;
+
+	/* Track modifier state */
+	if (ev->code == KEY_LEFTSHIFT || ev->code == KEY_RIGHTSHIFT) {
+		kbd_shift = (ev->value != 0);
+		return;
+	}
+	if (ev->code == KEY_LEFTCTRL || ev->code == KEY_RIGHTCTRL) {
+		kbd_ctrl = (ev->value != 0);
+		return;
+	}
+
+	/* Only handle key press (value=1) and repeat (value=2) */
+	if (ev->value == 0) return;
+
+	/* Arrow keys -> ANSI escape sequences */
+	if (ev->code == KEY_UP)    { write(master_fd, "\033[A", 3); return; }
+	if (ev->code == KEY_DOWN)  { write(master_fd, "\033[B", 3); return; }
+	if (ev->code == KEY_RIGHT) { write(master_fd, "\033[C", 3); return; }
+	if (ev->code == KEY_LEFT)  { write(master_fd, "\033[D", 3); return; }
+	if (ev->code == KEY_HOME)  { write(master_fd, "\033[H", 3); return; }
+	if (ev->code == KEY_END)   { write(master_fd, "\033[F", 3); return; }
+	if (ev->code == KEY_DELETE){ write(master_fd, "\033[3~", 4); return; }
+
+	if (ev->code < 128) {
+		char c = kbd_shift ? keymap_upper[ev->code] : keymap_lower[ev->code];
+		if (c) {
+			if (kbd_ctrl && c >= 'a' && c <= 'z')
+				c = c - 'a' + 1; /* Ctrl+A=1, Ctrl+C=3, etc. */
+			else if (kbd_ctrl && c >= 'A' && c <= 'Z')
+				c = c - 'A' + 1;
+			write(master_fd, &c, 1);
+		}
+	}
+}
+
 static volatile int running = 1;
 
 static void sigchld(int sig)
@@ -516,6 +601,8 @@ int main(void)
 
 	signal(SIGCHLD, sigchld);
 	signal(SIGPIPE, SIG_IGN);
+	signal(SIGTTOU, SIG_IGN);
+	signal(SIGTTIN, SIG_IGN);
 
 	if (fb_open() < 0)
 		return 1;
@@ -530,7 +617,8 @@ int main(void)
 		return 1;
 
 	/* Set stdin to raw mode if it's a terminal */
-	if (isatty(0)) {
+	int use_stdin = isatty(0);
+	if (use_stdin) {
 		tcgetattr(0, &old_tio);
 		new_tio = old_tio;
 		new_tio.c_lflag &= ~(ICANON | ECHO);
@@ -546,20 +634,27 @@ int main(void)
 	if (fifo_fd >= 0)
 		fprintf(stderr, "fbterm: listening on %s for VNC keyboard\n", KBD_FIFO);
 
+	/* Open USB keyboard input devices */
+	open_input_keyboards();
+
 	draw_cursor();
 
 	while (running) {
 		fd_set rfds;
-		int maxfd, ret;
+		int maxfd, ret, k;
 		struct timeval tv;
 
 		FD_ZERO(&rfds);
 		FD_SET(master_fd, &rfds);
-		FD_SET(0, &rfds);
+		if (use_stdin) FD_SET(0, &rfds);
 		maxfd = master_fd > 0 ? master_fd : 0;
 		if (fifo_fd >= 0) {
 			FD_SET(fifo_fd, &rfds);
 			if (fifo_fd > maxfd) maxfd = fifo_fd;
+		}
+		for (k = 0; k < kbd_count; k++) {
+			FD_SET(kbd_fds[k], &rfds);
+			if (kbd_fds[k] > maxfd) maxfd = kbd_fds[k];
 		}
 
 		tv.tv_sec = 0;
@@ -581,7 +676,7 @@ int main(void)
 		}
 
 		/* Console keyboard -> shell stdin */
-		if (FD_ISSET(0, &rfds)) {
+		if (use_stdin && FD_ISSET(0, &rfds)) {
 			unsigned char buf[64];
 			int n = read(0, buf, sizeof(buf));
 			if (n <= 0) break;
@@ -600,9 +695,19 @@ int main(void)
 				fifo_fd = open(KBD_FIFO, O_RDONLY | O_NONBLOCK);
 			}
 		}
+
+		/* USB keyboard input events -> shell stdin */
+		for (k = 0; k < kbd_count; k++) {
+			if (FD_ISSET(kbd_fds[k], &rfds)) {
+				struct input_event ev;
+				while (read(kbd_fds[k], &ev, sizeof(ev)) == sizeof(ev)) {
+					handle_input_event(&ev);
+				}
+			}
+		}
 	}
 
-	if (isatty(0))
+	if (use_stdin)
 		tcsetattr(0, TCSANOW, &old_tio);
 
 	if (child_pid > 0) {
