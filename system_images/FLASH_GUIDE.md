@@ -1,25 +1,25 @@
-# Sıfırdan Sistem Yükleme Rehberi
+# Flashing the System from Scratch
 
-## Dosyalar
+## Files
 
-| Dosya | NAND Offset | Boyut (hex) | Açıklama |
-|-------|------------|-------------|----------|
-| xloader_image.bin | 0x00000000 | 0x153C | DDR init, BootROM tarafından yüklenir |
-| l300_fwd_mod.fwd | 0x00080000 | 0xB4 | Boot config (console, kernel/rootfs boyutları) |
+| File | NAND Offset | Size (hex) | Description |
+|------|------------|------------|-------------|
+| xloader_image.bin | 0x00000000 | 0x153C | DDR init, loaded by BootROM |
+| l300_fwd_mod.fwd | 0x00080000 | 0xB4 | Boot config (console, kernel/rootfs sizes) |
 | u-boot.img | 0x000E0000 | 0x33014 | U-Boot 1.2.2 |
 | uImage | 0x001A0000 | 0x1913E0 | Linux 2.6.19.2 kernel |
 | l300_initramfs_minimal.gz | 0x00600000 | 0x31EA50 | Minimal initramfs (3.2MB) |
 
-## Yöntem 1: USB Flasher ile (board boş iken)
+## Method 1: USB Flasher (blank board)
 
 ```bash
 cd usb_flasher/flasher
 sudo tclsh flasher.tcl -f Scripts/flash_working_system.txt
 ```
 
-## Yöntem 2: U-Boot TFTP ile
+## Method 2: U-Boot TFTP
 
-Dosyaları TFTP sunucusuna kopyala (`/var/lib/tftpboot/`), sonra U-Boot'ta:
+Copy files to the TFTP server directory (`/var/lib/tftpboot/`), then in U-Boot:
 
 ```
 setenv serverip 192.168.1.100
@@ -52,11 +52,11 @@ nand erase 0x600000 0xC00000
 nand write.jffs2 0x800000 0x600000 0x31ea50
 ```
 
-Reset sonrası otomatik boot eder. Bootdelay sırasında tuşa BASMAYIN.
+After reset, the board auto-boots. Do NOT press any key during bootdelay.
 
-## Önemli Notlar
+## Important Notes
 
-- `saveenv` KULLANMAYIN — NAND'ı bozar
-- `boot` komutu U-Boot prompt'ında çalışmaz — autoboot timer'ı kullanın
-- Manuel boot gerekirse: `run step00` ... `run step04` sonra `bootm 800000`
-- TFTP dizini: `/var/lib/tftpboot/`
+- Do NOT use `saveenv` — it corrupts NAND
+- The `boot` command does not work from the U-Boot prompt — use the autoboot timer instead
+- For manual boot: `run step00` through `run step04`, then `bootm 800000`
+- TFTP directory: `/var/lib/tftpboot/`

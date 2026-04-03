@@ -20,20 +20,29 @@ Embedded Linux workspace for the **nComputing L300** thin client, repurposed as 
 ## Software
 
 - **Kernel:** Linux 2.6.19.2 (original nComputing BSP)
-- **Rootfs:** Custom initramfs (BusyBox 1.14.2, uClibc 0.9.27)
-- **fbterm:** Framebuffer terminal — 8x16 bitmap font, 128x48 chars, green-on-black
+- **Rootfs:** Minimal 3.2MB initramfs (BusyBox 1.14.2, uClibc 0.9.27)
+- **fbterm:** Framebuffer terminal with USB keyboard support — 8x16 bitmap font, 128x48 chars, green-on-black
 - **fbvnc_server:** VNC server on port 5900 with keyboard input
-- **Network:** Dropbear SSH, telnetd, DHCP
+- **Network:** Dropbear SSH, telnetd, DHCP with fixed MAC
 
 ## NAND Flash Layout
 
 | Offset | Size | Description |
 |--------|------|-------------|
-| 0x000000 | 5.4KB | X-Loader (BootROM → DDR init) |
+| 0x000000 | 5.4KB | X-Loader (BootROM -> DDR init) |
 | 0x080000 | 180B | FWD boot config |
 | 0x0E0000 | 208KB | U-Boot 1.2.2 |
 | 0x1A0000 | 1.6MB | Linux kernel (uImage) |
-| 0x600000 | ~11.6MB | Initramfs (cpio+gzip) |
+| 0x600000 | ~3.2MB | Minimal initramfs (cpio+gzip) |
+
+## Quick Start
+
+Pre-built system images are in `system_images/`. See [FLASH_GUIDE.md](system_images/FLASH_GUIDE.md) for step-by-step flashing instructions.
+
+After flashing, the board auto-boots on power-up. Access via:
+- **VGA + USB keyboard** (direct framebuffer terminal)
+- **VNC** on port 5900
+- **SSH/telnet** (root, no password)
 
 ## Building
 
@@ -52,35 +61,29 @@ arm-linux-gcc -static -O2 \
 
 ### Building initramfs
 
+Extract the original nComputing initramfs, modify, and repack. Do NOT change file ownership.
+
 ```bash
-cd firmware/initramfs_orig/
-sudo chown -R root:root .
-find . | sudo cpio -o -H newc 2>/dev/null | gzip > ../l300_initramfs_mod.gz
-```
-
-## Flashing
-
-### Via U-Boot TFTP
-
-```
-setenv serverip 192.168.11.121
-setenv ipaddr 192.168.11.200
-setenv ethaddr 00:1A:2B:3C:4D:5E
-tftpboot 0x800000 <file>
-nand erase <offset> <size>
-nand write.jffs2 0x800000 <offset> <size>
+mkdir /tmp/rootfs && cd /tmp/rootfs
+gunzip -c original_initramfs.gz | sudo cpio -idm
+# Make changes...
+sudo find . | sudo cpio -o -H newc 2>/dev/null | gzip > new_initramfs.gz
 ```
 
 ## Key Findings
 
-- **mtdparts is required** in bootargs — without it, the kernel's built-in partition table maps jffs2 over the initramfs NAND area, erasing it on boot
+- **jffs2 mounts must be disabled** — the kernel's built-in MTD partition table maps mtdblock2/3 over the initramfs NAND area (0x600000), erasing it on boot. `CONFIG_MTD_CMDLINE_PARTS` is not enabled, so the `mtdparts` boot parameter is ignored.
+- **saveenv corrupts NAND** — do not use it; the environment storage overlaps with other NAND partitions
+- **`boot` command is broken at U-Boot prompt** — autoboot timer works, but typing `boot` manually does not. Use autoboot or run steps individually.
 - **Console is `ttyS0`**, not `ttyAMA0`
-- **I2C EEPROM is missing** — MAC address must be set manually at boot
+- **I2C EEPROM is missing** — MAC address reads as `ff:ff:ff:ff:ff:ff`, must be set manually at boot
 - **OABI only** — kernel 2.6.19 does not support EABI5 binaries
+- **Do not chown initramfs** — `sudo chown -R root:root` on the extracted initramfs breaks boot; preserve original uid 1002
 
 ## Project Structure
 
 ```
+system_images/      # Pre-built images for flashing from scratch
 fbvnc/              # Framebuffer terminal + VNC server source
 firmware/           # Boot images and initramfs config
   initramfs_orig/   # Modified rootfs (etc/rc.sh, inittab, etc.)
@@ -90,4 +93,4 @@ packages/           # opkg package builder
 
 ## License
 
-MIT License — see [LICENSE](LICENSE)
+MIT License -- see [LICENSE](LICENSE)
