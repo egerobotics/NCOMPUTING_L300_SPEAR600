@@ -23,7 +23,7 @@ Embedded Linux workspace for the **nComputing L300** thin client, repurposed as 
 - **Rootfs:** Minimal 3.2MB initramfs (BusyBox 1.14.2, uClibc 0.9.27)
 - **fbterm:** Framebuffer terminal with USB keyboard support — 8x16 bitmap font, 128x48 chars, green-on-black
 - **fbvnc_server:** VNC server on port 5900 with keyboard input
-- **Network:** Dropbear SSH, telnetd, DHCP with fixed MAC
+- **Network:** Dropbear SSH, telnetd, DHCP; eth0 MAC read per unit from `/sbin/getdevprop mac` (fallback `00:1A:2B:3C:4D:5E`)
 
 ## NAND Flash Layout
 
@@ -76,7 +76,7 @@ sudo find . | sudo cpio -o -H newc 2>/dev/null | gzip > new_initramfs.gz
 - **saveenv corrupts NAND** — do not use it; the environment storage overlaps with other NAND partitions
 - **`boot` command is broken at U-Boot prompt** — autoboot timer works, but typing `boot` manually does not. Use autoboot or run steps individually.
 - **Console is `ttyS0`**, not `ttyAMA0`
-- **I2C EEPROM is missing** — MAC address reads as `ff:ff:ff:ff:ff:ff`, must be set manually at boot
+- **Per-unit MAC is in firmware data, not in an I2C EEPROM** — the EEPROM is absent, but `/sbin/getdevprop mac` returns the real MAC (NComputing OUI) and `getdevprop sn` the serial; `rc.sh` sets eth0 from it (fallback `00:1A:2B:3C:4D:5E` if the read fails)
 - **OABI only** — kernel 2.6.19 does not support EABI5 binaries
 - **Do not chown initramfs** — `sudo chown -R root:root` on the extracted initramfs breaks boot; preserve original uid 1002
 

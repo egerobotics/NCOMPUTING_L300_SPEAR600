@@ -49,12 +49,19 @@
 # Original: mount -t jffs2 /dev/mtdblock2 /writable
 # Original: mount -t jffs2 /dev/mtdblock3 /readable
 
-# Setup network with fixed MAC
+# Setup network with the per-unit MAC from firmware data
+# (fallback to the historical fixed MAC if the read fails)
+MAC=$(/sbin/getdevprop mac 2>/dev/null)
+case "$MAC" in
+	""|00:00:00:00:00:00|ff:ff:ff:ff:ff:ff) MAC=00:1A:2B:3C:4D:5E ;;
+	[0-9a-fA-F][0-9a-fA-F]:[0-9a-fA-F][0-9a-fA-F]:[0-9a-fA-F][0-9a-fA-F]:[0-9a-fA-F][0-9a-fA-F]:[0-9a-fA-F][0-9a-fA-F]:[0-9a-fA-F][0-9a-fA-F]) ;;
+	*) MAC=00:1A:2B:3C:4D:5E ;;
+esac
 ip link set eth0 down
-ip link set eth0 address 00:1A:2B:3C:4D:5E
+ip link set eth0 address "$MAC"
 ip link set eth0 up
 udhcpc -i eth0 -n -q
-echo "Network configured with MAC 00:1A:2B:3C:4D:5E"
+echo "Network configured with MAC $MAC"
 
 # Start telnetd for remote access
 /usr/sbin/telnetd -l /bin/sh
