@@ -15,7 +15,7 @@ The board runs **Linux 2.6.19.2** (original nComputing BSP kernel) with a modifi
 **Current initramfs includes:**
 - `fbterm` — framebuffer terminal (draws directly to /dev/fb0, green-on-black, 128x48 chars)
 - `fbvnc_server` — VNC server on port 5900 with keyboard input via FIFO `/tmp/vnc_kbd`
-- Network auto-config with fixed MAC `00:1A:2B:3C:4D:5E`
+- Network auto-config; eth0 MAC from `/sbin/getdevprop mac` (per unit), fallback `00:1A:2B:3C:4D:5E` if the read fails
 - Dropbear SSH + telnetd
 
 ## NAND Flash Layout
@@ -31,7 +31,7 @@ The board runs **Linux 2.6.19.2** (original nComputing BSP kernel) with a modifi
 ## Critical Hardware Facts
 
 - **Console is `ttyS0`**, not `ttyAMA0`. The SPEAr UART driver uses a different name than PL011.
-- **I2C EEPROM is missing** — MAC address reads as `ff:ff:ff:ff:ff:ff`. Must be fixed at boot via `ip link set eth0 address 00:1A:2B:3C:4D:5E`.
+- **Per-unit MAC lives in firmware data, not in an I2C EEPROM** — the EEPROM is absent, but `/sbin/getdevprop mac` returns the real MAC (unit #1: `00:0f:e0:2b:34:15`, NComputing OUI) and `getdevprop sn` the serial. `rc.sh` sets eth0 from it (fallback `00:1A:2B:3C:4D:5E` if the read fails), so flashed units no longer collide.
 - **BootROM reads NAND with its own ECC** — data written by the old U-Boot's `nand write.jffs2` command is compatible. Linux `nandwrite` and `nandwrite --noecc` do NOT produce BootROM-compatible data.
 - **FWD file controls boot** — U-Boot reads boot parameters from the FWD binary at 0x80000, not from `saveenv`. FWD binary structure: offset 0x20=console string, 0x4C=kernel_size (u32 LE), 0x54=rootfs_size (u32 LE).
 - **FWD auto-boot works** — The `boot` command runs FWD-based bootsteps which include mtdparts. Board boots automatically on power-up.
